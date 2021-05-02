@@ -1,0 +1,27 @@
+@import '~antd/dist/antd.css';
+
+.logo {
+  height: 60px;
+  width: 60px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.header {
+  margin-top:50px;
+  margin-left:50px;
+  display: inline-block;
+  background-color: #ffffff;
+  min-height: 100vh;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.title {
+  display: inline-block;
+}
+
+.App-link {
+  color: #61dafb;
+}
