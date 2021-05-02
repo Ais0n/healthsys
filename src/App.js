@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+﻿import logo from './icon.png';
+import './App.less';
+import { Typography } from 'antd';
+
+const { Title } = Typography;
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="header">
+        <img className="logo" src={logo} alt=""></img>
+        <Title level="h1">阳光医疗服务平台</Title>
+      </div>
+      <footer> This is the game for the bootcamp in ByteDance</footer>
     </div>
   );
 }
