@@ -1,13 +1,13 @@
-﻿import logo from './icon.png';
-import shuffle_pic_1 from './shuffle_pic_1.png' 
-import patient_pic from './I_am_patient.png' 
-import doctor_pic from './I_am_doctor.png' 
-import depart_pic_A from './depart_A.png' 
-import depart_pic_B from './depart_B.png' 
-import depart_pic_C from './depart_C.png' 
-import depart_pic_D from './depart_D.png' 
-import depart_pic_E from './depart_E.png' 
-import doctor_profile from './default-profile.png'
+﻿import logo from './pic/icon.png';
+import shuffle_pic_1 from './pic/shuffle_pic_1.png' 
+import patient_pic from './pic/I_am_patient.png' 
+import doctor_pic from './pic/I_am_doctor.png' 
+import depart_pic_A from './pic/depart_A.png' 
+import depart_pic_B from './pic/depart_B.png' 
+import depart_pic_C from './pic/depart_C.png' 
+import depart_pic_D from './pic/depart_D.png' 
+import depart_pic_E from './pic/depart_E.png' 
+import doctor_profile from './pic/default-profile.png'
 
 import './App.css';
 import { Typography, Button, Input } from 'antd';
