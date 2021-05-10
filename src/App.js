@@ -10,7 +10,7 @@ import depart_pic_E from './pic/depart_E.png'
 import doctor_profile from './pic/default-profile.png'
 
 import './App.css';
-import { Typography, Button, Input } from 'antd';
+import { Typography, Button, Input, Carousel} from 'antd';
 
 const { Title } = Typography;
 const { Search} = Input;
@@ -41,7 +41,20 @@ function App() {
 
       <div className="picture">
           <div className="sub-picture">
-            <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
+            <Carousel autoplay>
+                <div>
+                  <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
+                </div>
+                <div>
+                  <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
+                </div>
+                <div>
+                  <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
+                </div>
+                <div>
+                  <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
+                </div>
+              </Carousel>
           </div>
 
           <div className="sub-picture">
