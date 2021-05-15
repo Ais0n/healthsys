@@ -1,0 +1,47 @@
+.title {
+    margin-right: 400px;
+    display: inline-block;
+    font-size: calc(7px + 2vmin);
+    color: black;
+}
+
+.logo {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.search {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+}
+
+.button {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.vertical-split-line {
+    vertical-align: top;
+    margin-top:15px;
+    margin-left:40px;
+    margin-right: 40px;
+    display: inline-block;
+    background-color: #aaaaaa;
+    min-width: 1px;
+    min-height: 3vh;
+}
+
+.header {
+    margin-top:20px;
+    margin-left:50px;
+    display: block;
+    background-color: #ffffff;
+    min-height: 7vh;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
