@@ -1,0 +1,77 @@
+.sub-text-table2{
+    margin-top: 15px;
+    margin-left: 30px;
+    height: 150px;
+    width: 1460px;
+    background-color: #eeeeee;
+  }
+
+  .Gheader {
+    margin-top: 15px;
+    margin-left: 30px;
+    height: 140%;
+    width: 95%;
+  }
+
+  .g-title {
+    margin-right: 20px;
+    margin-left: 35px;
+    display: inline-block;
+    font-size: calc(8px + 4vmin);
+    color: black;
+    font-family: "Microsoft YaHei",Tahoma, Arial;
+  }
+  
+  .g-sub-title {
+    font-family:"宋体";
+    display: inline-block;
+    font-size: calc(1px + 1.8vmin);
+    color: grey;
+  }
+
+  .g-sub-text-table-title {
+    margin-left: 10px;
+    display: inline-block;
+    font-size: calc(1.5px + 3.8vmin);
+    color: black;
+  }
+
+  .g-sub-text-table-title-2 {
+    margin-left: 5px;
+    margin-right:5px;
+    margin:50px;
+    display: inline-block;
+    font-size: calc(1px + 2.8vmin);
+    color: grey;
+  }
+
+  .g-vertical-split-line {
+    vertical-align: top;
+    margin-top:15px;
+    margin-left:10px;
+    margin-right: 10px;
+    display: inline-block;
+    background-color: #aaaaaa;
+    min-width: 2px;
+    min-height: 4vh;
+  }
+
+  .g-button {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top:8px;
+    display: inline-block;
+  }
+
+  .g-doctor-info-table {
+    text-align: center;
+    display: block;
+    min-height: 20vh;
+  }
+
+  .g-doctor-info {
+    display: inline-block;
+    margin:60px;
+    margin-top: 80px;
+    min-height: 10vh;
+  }
