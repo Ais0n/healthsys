@@ -1,5 +1,4 @@
 import Gheader from '../pic/Gheader.png'
-import reservation from '../pic/reservation.png'
 import doctor_profile from '../pic/default-profile.png'
 import './Mainpage.css'
 import './Guahao.css'
