@@ -1,7 +1,10 @@
 # healthsys
 Project for SE 2021
 
+**Backend: [healthsys-backend](https://github.com/chronoby/healthsys-backend)**
+
 # Contribution process
+
 - DO NOT COMMIT TO MASTER BRANCH DIRECTEDLY
 - Create a new branch, commit your code, and create a merge request after you push
 
