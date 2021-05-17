@@ -9,7 +9,8 @@ import depart_pic_E from '../pic/depart_E.png'
 import doctor_profile from '../pic/default-profile.png'
 import './Mainpage.css'
 
-import { Typography, Button, Input, Carousel} from 'antd';
+import { useState } from 'react';
+import { Typography, Button, Input, Carousel, Modal} from 'antd';
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 
