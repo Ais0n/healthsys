@@ -1,0 +1,11 @@
+.loginForm {
+    /* display: block; */
+    margin-top:27px;
+    margin-left:0px;
+    font-family: "Microsoft YaHei",Tahoma, Arial;
+    /* background-color: #3792E2;
+    min-height: 6vh;
+    flex-direction: row;
+    font-size: calc(10px + 2vmin);
+    color: black; */
+}
