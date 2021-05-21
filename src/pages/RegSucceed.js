@@ -4,7 +4,7 @@ import { Layout } from 'antd'
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 
-class LoginSucceed extends React.Component {
+class RegisterSucceed extends React.Component {
     values=""
     constructor(props){
         super(props);
@@ -16,19 +16,19 @@ class LoginSucceed extends React.Component {
             <Myheader/>
             <Navbar/>
                 <div>
-                <text>这是一个临时页面</text><p></p>
-                    <text>log in successed</text>
+                    <text>这是一个临时页面</text><p></p>
+                    <text>register successed</text>
                     <p></p>
                     <text>username: {this.values.username}</text>
                     <p></p>
                     <text>password: {this.values.password}</text>
                     <p></p>
-                    <text>remember: {this.values.remember?"true":"false"}</text>
+                    <text>contact: {this.values.contact}</text>
                 </div>
               
             </div>
       )
     }
 }
-LoginSucceed.contextTypes = {router:()=>React.PropTypes.func.isRequired};
-export default LoginSucceed
+RegisterSucceed.contextTypes = {router:()=>React.PropTypes.func.isRequired};
+export default RegisterSucceed

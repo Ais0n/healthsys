@@ -17,6 +17,9 @@ class Myheader extends React.Component {
     login = () => {
         this.props.history.push("/login");
     }
+    register = () => {
+        this.props.history.push("/register");
+    }
     render(){
         return(
             <div className="header">
@@ -25,7 +28,7 @@ class Myheader extends React.Component {
                 <div className="search"><Search placeholder="站内搜索" onSearch={onsearch} style={{ width: 200 }} /></div>
                 <div className="vertical-split-line" />
                 <div className="button"><Button type="primary" onClick={this.login}>登录</Button></div>
-                <div className="button"><Button>注册</Button></div>
+                <div className="button"><Button type="primary" onClick={this.register}>注册</Button></div>
             </div>
         );
     };
