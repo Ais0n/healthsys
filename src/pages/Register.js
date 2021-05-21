@@ -90,7 +90,7 @@ class Register extends React.Component {
                     name="contact"
                     rules={[{ required: true, message: '请输入至少一个有效的联系方式.' }]}
                 >
-                    <Input.Password />
+                    <Input />
                 </Form.Item>
 
                 <Form.Item {...varifyCodeLayout}>
