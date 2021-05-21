@@ -61,7 +61,8 @@ class Register extends React.Component {
             <div>
                 <Myheader/>
                 <Navbar/>
-                <div  className="loginForm">
+                <div className="registerBox">
+                <div  className="registerForm">
                 <Form
                 {...layout}
                 name="basic"
@@ -70,9 +71,9 @@ class Register extends React.Component {
                 onFinishFailed={this.onFinishFailed}
                 >
                 <Form.Item
-                    label="用户名"
+                    label="用户名/手机号码"
                     name="username"
-                    rules={[{ required: true, message: '请设置您的用户名.' }]}
+                    rules={[{ required: true, message: '请输入您的手机号码.' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -83,14 +84,6 @@ class Register extends React.Component {
                     rules={[{ required: true, message: '请设置一个密码.' }]}
                 >
                     <Input.Password />
-                </Form.Item>
-
-                <Form.Item
-                    label="联系方式"
-                    name="contact"
-                    rules={[{ required: true, message: '请输入至少一个有效的联系方式.' }]}
-                >
-                    <Input />
                 </Form.Item>
 
                 <Form.Item {...varifyCodeLayout}>
@@ -105,6 +98,7 @@ class Register extends React.Component {
 
                 </Form>
                 
+                </div>
                 </div>
             </div>
         );

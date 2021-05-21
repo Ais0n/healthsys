@@ -64,6 +64,7 @@ class Login extends React.Component {
             <div>
                 <Myheader/>
                 <Navbar/>
+                <div className="loginBox">
                 <div  className="loginForm">
                 <Form
                 {...layout}
@@ -104,6 +105,7 @@ class Login extends React.Component {
 
                 </Form>
                 
+                </div>
                 </div>
             </div>
         );

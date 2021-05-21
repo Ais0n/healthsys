@@ -1,11 +1,38 @@
-.loginForm {
-    /* display: block; */
+/* .loginForm {
+    display: block;
     margin-top:27px;
     margin-left:0px;
     font-family: "Microsoft YaHei",Tahoma, Arial;
-    /* background-color: #3792E2;
+    background-color: #3792E2;
     min-height: 6vh;
     flex-direction: row;
     font-size: calc(10px + 2vmin);
-    color: black; */
+    color: black;
+} */
+
+.loginForm {
+    /* display: block; */
+    /* margin-top:27px; */
+    /* margin-left:0px; */
+    font-family: "Microsoft YaHei",Tahoma, Arial;
+    vertical-align: middle;
+    position: absolute;
+    top:50%;
+    left:50%;
+    width:1000px;
+    height:400px;
+    transform: translate(-50%,-50%);
+    /* background: blue; */
+    /* background-color: #3792E2;*/
+    /* min-height: 6vh; */
+    /* flex-direction: row; */
+    /* font-size: calc(10px + 2vmin); */
+    /* color: black; */
+}
+
+.loginBox{
+    position: relative;
+    /* background: red; */
+    /* width:1080px;*/
+    height: 630px; 
 }
