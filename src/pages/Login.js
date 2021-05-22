@@ -102,9 +102,7 @@ class Login extends React.Component {
                     好了
                     </Button>
                 </Form.Item>
-
-                </Form>
-                
+                </Form>    
                 </div>
                 </div>
             </div>

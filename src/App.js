@@ -17,6 +17,7 @@ function App() {
         <Route path="/register" component={Register}/>
         <Route path="/loginsucceed" component={LoginSucceed}/>
         <Route path="/regsucceed" component={RegisterSucceed}/>
+
       </div>
     </BrowserRouter>
   );
