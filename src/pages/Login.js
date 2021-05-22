@@ -99,7 +99,7 @@ class Login extends React.Component {
 
                 <Form.Item {...submitLayout}>
                     <Button type="primary" htmlType="submit" align="center">
-                    好了
+                    登录
                     </Button>
                 </Form.Item>
                 </Form>    

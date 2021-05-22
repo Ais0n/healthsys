@@ -92,7 +92,7 @@ class Register extends React.Component {
 
                 <Form.Item {...submitLayout}>
                     <Button type="primary" htmlType="submit" align="center">
-                    好了
+                    注册
                     </Button>
                 </Form.Item>
 
