@@ -4,7 +4,7 @@ import { Layout } from 'antd'
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 import Verifycode from './Components/Verifycode'
-import './Login.css'
+import './Register.css'
 
 const { Title } = Typography;
 const layout = {
@@ -22,7 +22,7 @@ const varifyCodeLayout = {
     wrapperCol: {align: "center"},
 };
 
-class Login extends React.Component {
+class Register extends React.Component {
     constructor(props){
         super(props);
     }
@@ -37,11 +37,8 @@ class Login extends React.Component {
         if(this.verifyCodeSucceed){
             alert('成功，接下来将跳转到新页面.');
             this.props.history.push({
-                pathname:"/loginsucceed",
+                pathname:"/regsucceed",
                 query:{
-                    // username: values.username,
-                    // password: values.password,
-                    // remember: values.remember
                     values:values
                 }
             });
@@ -64,8 +61,8 @@ class Login extends React.Component {
             <div>
                 <Myheader/>
                 <Navbar/>
-                <div className="loginBox">
-                <div  className="loginForm">
+                <div className="registerBox">
+                <div  className="registerForm">
                 <Form
                 {...layout}
                 name="basic"
@@ -74,9 +71,9 @@ class Login extends React.Component {
                 onFinishFailed={this.onFinishFailed}
                 >
                 <Form.Item
-                    label="用户名"
+                    label="用户名/手机号码"
                     name="username"
-                    rules={[{ required: true, message: '请输入用户名.' }]}
+                    rules={[{ required: true, message: '请输入您的手机号码.' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -84,13 +81,9 @@ class Login extends React.Component {
                 <Form.Item
                     label="密码"
                     name="password"
-                    rules={[{ required: true, message: '请输入密码.' }]}
+                    rules={[{ required: true, message: '请设置一个密码.' }]}
                 >
                     <Input.Password />
-                </Form.Item>
-
-                <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                    <Checkbox>记住我</Checkbox>
                 </Form.Item>
 
                 <Form.Item {...varifyCodeLayout}>
@@ -102,7 +95,9 @@ class Login extends React.Component {
                     好了
                     </Button>
                 </Form.Item>
-                </Form>    
+
+                </Form>
+                
                 </div>
                 </div>
             </div>
@@ -110,4 +105,4 @@ class Login extends React.Component {
     };
 }
 
-export default Login;
+export default Register;

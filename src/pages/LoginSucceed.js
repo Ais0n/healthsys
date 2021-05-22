@@ -16,6 +16,7 @@ class LoginSucceed extends React.Component {
             <Myheader/>
             <Navbar/>
                 <div>
+                <text>这是一个临时页面</text><p></p>
                     <text>log in successed</text>
                     <p></p>
                     <text>username: {this.values.username}</text>
