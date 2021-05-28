@@ -3,9 +3,8 @@ import doctor_profile from '../pic/default-profile.png'
 import './Mainpage.css'
 import './Guahao.css'
 
-import { Typography, Button, Input, Carousel} from 'antd';
-import Myheader from './Components/Myheader'
-import Navbar from './Components/Navbar'
+import { Typography, Button, Input, Carousel,Radio} from 'antd';
+
 function Guahao(){
     return(
         <div className="App">
@@ -27,10 +26,14 @@ function Guahao(){
                  <div className="g-sub-text-table-title">科室筛选</div>
                  <div className="g-vertical-split-line"/>
                  <div className="g-sub-text-table-title-2">
-                     <input type="radio" name="depart" id="temp1" /><label for="temp1">全部</label>
-                     <input type="radio" name="depart" id="temp2" /><label for="temp2">精神卫生科</label>
-                     <input type="radio" name="depart" id="temp3" /><label for="temp3">内分泌科</label>
-                     <input type="radio" name="depart" id="temp4" /><label for="temp4">肾脏病科</label>
+                  <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
+                        <Radio.Button value='a'>全部</Radio.Button>
+                        <Radio.Button value='b'>精神卫生科</Radio.Button>
+                        <Radio.Button value='c'>内分泌科</Radio.Button>
+                        <Radio.Button value='d'>肾脏病科</Radio.Button>
+                        <Radio.Button value='e'>骨科</Radio.Button>
+                        <Radio.Button value='f'>口腔科</Radio.Button>
+                      </Radio.Group>
                  </div>
                 </div>
 
@@ -38,10 +41,11 @@ function Guahao(){
                  <div className="g-sub-text-table-title">就诊日期</div>
                  <div className="g-vertical-split-line"/>
                  <div className="g-sub-text-table-title-2">
-                     <input type="radio" name="date" id="temp1" /><label for="temp1">全部</label>
-                     <input type="radio" name="date" id="temp2" /><label for="temp2">今日</label>
-                     <input type="radio" name="date" id="temp3" /><label for="temp3">明日</label>
-                     <input type="radio" name="date" id="temp4" /><label for="temp4">昨日</label>
+                  <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
+                        <Radio.Button value='a'>全部</Radio.Button>
+                        <Radio.Button value='b'>今日</Radio.Button>
+                        <Radio.Button value='c'>指定日期</Radio.Button>
+                      </Radio.Group>
                  </div>
                 </div>
 
@@ -49,9 +53,11 @@ function Guahao(){
                  <div className="g-sub-text-table-title">就诊时段</div>
                  <div className="g-vertical-split-line"/>
                  <div className="g-sub-text-table-title-2">
-                     <input type="radio" name="time" id="temp1" /><label for="temp1">全部</label>
-                     <input type="radio" name="time" id="temp2" /><label for="temp2">上午</label>
-                     <input type="radio" name="time" id="temp3" /><label for="temp3">下午</label>
+                  <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
+                        <Radio.Button value='a'>全部</Radio.Button>
+                        <Radio.Button value='b'>上午</Radio.Button>
+                        <Radio.Button value='c'>下午</Radio.Button>
+                      </Radio.Group>
                  </div>
                 </div>
 
