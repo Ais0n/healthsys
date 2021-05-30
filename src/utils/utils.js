@@ -1,4 +1,4 @@
-const serverAddr = "http://121.41.171.65:3000";
+const serverAddr = "http://127.0.0.1:8000";
 const axios = require('axios');
 var instance = axios.create({
     baseURL: serverAddr,
@@ -11,7 +11,11 @@ export function login(data){
             accountId: data.accountId,
             password: data.password
         }).then((value) => {
-            resolve(value);
+            if(value.data.loginData.loginStatus){
+                resolve(value);
+            }else{
+                reject(value);
+            }
         }).catch((err)=>{
             reject(err);
         })
