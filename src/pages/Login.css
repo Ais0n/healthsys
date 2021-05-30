@@ -36,3 +36,8 @@
     /* width:1080px;*/
     height: 630px; 
 }
+
+.loginProForm {
+    margin: 6% auto;
+    width: 30%;
+}
