@@ -1,5 +1,5 @@
 import './Myheader.css';
-import { Button, Input } from 'antd';
+import { Button, Input, Divider} from 'antd';
 import logo from '../../pic/icon.png';
 import React from 'react';
 import {withRouter} from 'react-router-dom'
@@ -35,3 +35,4 @@ class Myheader extends React.Component {
 };
 
 export default withRouter(Myheader);
+

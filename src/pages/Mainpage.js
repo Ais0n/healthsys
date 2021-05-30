@@ -9,20 +9,46 @@ import depart_pic_E from '../pic/depart_E.png'
 import doctor_profile from '../pic/default-profile.png'
 import './Mainpage.css'
 
-import { useState } from 'react';
-import { Typography, Button, Input, Carousel, Modal} from 'antd';
+import { Typography, Button, Input, Carousel, Radio} from 'antd';
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 
 const { Title } = Typography;
 
+const onchange = () => {
+    console.log("search")
+    return (
+    <div className="doctor-info-table">
+      <div className="doctor-info">
+          <img className="doctor-profile" src={doctor_profile} alt=""></img>
+          <div className="doctor-info-1">张三</div>
+          <div className="doctor-info-2">神经内科 主治医师</div>
+      </div>
+      <div className="doctor-info">
+          <img className="doctor-profile" src={doctor_profile} alt=""></img>
+          <div className="doctor-info-1">李四</div>
+          <div className="doctor-info-2">骨科 专家医师</div>
+      </div>
+      <div className="doctor-info">
+          <img className="doctor-profile" src={doctor_profile} alt=""></img>
+          <div className="doctor-info-1">王五</div>
+          <div className="doctor-info-2">口腔科 专家医师</div>
+      </div>
+    </div>
+    )
+}
+
+function test(){
+  return (
+    <div>Hello, world </div>
+  );
+}
+
 function Mainpage() {
   return (
     <div className="App">
-
       <Myheader/>
       <Navbar/>
-
       <div className="picture">
           <div className="sub-picture">
             <Carousel autoplay>
@@ -62,7 +88,6 @@ function Mainpage() {
 
 
       <div className="text">
-
           <div className="sub-text">
               <div className="sub-text-title">
                 <div className="sub-title">找科室</div>
@@ -116,38 +141,41 @@ function Mainpage() {
               </div>
               <div className="sub-text-table">
                 <div className="sub-text-table-one-line">
-                 <div className="sub-text-table-title">科室筛选</div>
-                 <div className="vertical-split-line-2"/>
-                 <div className="sub-text-table-title-2">
-                     <input type="radio" name="depart" id="temp1" /><label for="temp1">全部</label>
-                     <input type="radio" name="depart" id="temp2" /><label for="temp2">精神卫生科</label>
-                     <input type="radio" name="depart" id="temp3" /><label for="temp3">内分泌科</label>
-                     <input type="radio" name="depart" id="temp4" /><label for="temp4">肾脏病科</label>
-                 </div>
+                  <div className="sub-text-table-title">科室筛选</div>
+                  <div className="vertical-split-line-2"/>
+                  <div className="sub-text-table-title-2">
+                    <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
+                      <Radio.Button value='a'>全部</Radio.Button>
+                      <Radio.Button value='b'>精神卫生科</Radio.Button>
+                      <Radio.Button value='c'>内分泌科</Radio.Button>
+                      <Radio.Button value='d'>肾脏病科</Radio.Button>
+                    </Radio.Group>
+                  </div>
                 </div>
 
                 <div className="sub-text-table-one-line">
-                 <div className="sub-text-table-title">就诊日期</div>
-                 <div className="vertical-split-line-2"/>
-                 <div className="sub-text-table-title-2">
-                     <input type="radio" name="date" id="temp1" /><label for="temp1">全部</label>
-                     <input type="radio" name="date" id="temp2" /><label for="temp2">今日</label>
-                     <input type="radio" name="date" id="temp3" /><label for="temp3">明日</label>
-                     <input type="radio" name="date" id="temp4" /><label for="temp4">昨日</label>
-                 </div>
+                  <div className="sub-text-table-title">就诊日期</div>
+                  <div className="vertical-split-line-2"/>
+                  <div className="sub-text-table-title-2">
+                    <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
+                      <Radio.Button value='a'>全部</Radio.Button>
+                      <Radio.Button value='b'>今日</Radio.Button>
+                      <Radio.Button value='c'>指定日期</Radio.Button>
+                    </Radio.Group>
+                  </div>
                 </div>
 
                 <div className="sub-text-table-one-line">
-                 <div className="sub-text-table-title">就诊时段</div>
-                 <div className="vertical-split-line-2"/>
-                 <div className="sub-text-table-title-2">
-                     <input type="radio" name="time" id="temp1" /><label for="temp1">全部</label>
-                     <input type="radio" name="time" id="temp2" /><label for="temp2">上午</label>
-                     <input type="radio" name="time" id="temp3" /><label for="temp3">下午</label>
-                 </div>
+                  <div className="sub-text-table-title">就诊时段</div>
+                  <div className="vertical-split-line-2"/>
+                  <div className="sub-text-table-title-2">
+                    <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
+                      <Radio.Button value='a'>全部</Radio.Button>
+                      <Radio.Button value='b'>上午</Radio.Button>
+                      <Radio.Button value='c'>下午</Radio.Button>
+                    </Radio.Group>
+                  </div>
                 </div>
-
-
               </div>
 
               <div className="doctor-info-table">
@@ -169,8 +197,7 @@ function Mainpage() {
               </div>
           </div>
       </div>
-
-
+      test()
 
       <footer>SE2021 Project</footer>
     </div>

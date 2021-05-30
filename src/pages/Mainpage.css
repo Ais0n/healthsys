@@ -3,25 +3,16 @@
 a:link {
   color: white;
   background-color: transparent;
-  text-decoration: none;
 }
 
 a:visited {
   color: white;
   background-color: transparent;
-  text-decoration: none;
 }
 
 a:hover {
-  color: white;
+  color: burlywood;
   background-color: transparent;
-  text-decoration: none;
-}
-
-a:active {
-  color: white;
-  background-color: transparent;
-  text-decoration: none;
 }
 
 .vertical-split-line-2 {
@@ -45,9 +36,9 @@ a:active {
 }
 
 .shuffle-pic {
-  margin-top: 50px;
-  margin-left: 50px;
-  height: 190%;
+  margin-top: 3%;
+  margin-left: 3%;
+  height: 150%;
   width: 90%;
 }
 
@@ -57,13 +48,12 @@ a:active {
   -moz-box-shadow: #666 0px 0px 10px;
   box-shadow: #666 0px 0px 10px;
   border-radius: 20px; 
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .doctor-patient-pic {
-  height: 100%;
   width: 100%;
   display: block;
   border-radius: 10px 10px 0px 0px;
@@ -79,18 +69,14 @@ a:active {
   display: block;
   margin-top:0px;
   margin-left:0px;
-
 }
 
 .sub-picture {
   vertical-align: top;
-  min-height: 40vh;
+  height: 30%;
   width: 50%;
-  height: 50%;
   display: inline-block;
-  margin-top:0px;
-  margin-bottom: 20px;
-  margin-left:0px;
+  margin-bottom: 2%;
   background-color: #ffffff;
   flex-direction: row;
   font-size: calc(10px + 2vmin);
@@ -98,16 +84,16 @@ a:active {
 }
 
 .doctor-patient-text-1 {
-  margin-top: 8px;
-  text-align:center;
+  margin-top: 3%;
+  text-align: center;
   font-family: "Microsoft YaHei",Tahoma, Arial;
   font-size: calc(4px + 2vmin);
   color: #666666;
 }
 
 .doctor-patient-text-2 {
-  margin-bottom: 15px;
-  text-align:center;
+  margin-bottom: 3%;
+  text-align: center;
   font-family: "Courier New";
   font-size: calc(4px + 2vmin);
   color: #666666;
@@ -146,9 +132,9 @@ a:active {
 }
 
 .department-table {
-  margin-top: 50px;
-  margin-left: 50px;
-  margin-right: 100px;
+  margin-top: 10%;
+  margin-left: 5%;
+  margin-right: 0%;
   display: block;
 }
 
@@ -163,14 +149,13 @@ a:active {
 
 .doctor-info-table {
   text-align: center;
-  margin-right: 200px;
   display: block;
+  margin-top: 5%;
   min-height: 10vh;
 }
 
 .doctor-info {
   display: inline-block;
-  margin-top: 50px;
   min-height: 10vh;
 }
 
@@ -188,10 +173,12 @@ a:active {
 }
 
 .sub-text-table{
-  margin-top: 15px;
-  margin-left: 30px;
-  height: 150px;
-  width: 500px;
+  margin-top: 5%;
+  margin-left: 5%;
+  padding-bottom: 2%;
+  padding-top: 2%;
+  height: 100%;
+  width: 100%;
   background-color: #eeeeee;
 }
 

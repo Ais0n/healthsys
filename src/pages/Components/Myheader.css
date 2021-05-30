@@ -1,43 +1,44 @@
 .title {
-    margin-right: 400px;
+    vertical-align: bottom;
+    margin-right: 30%;
     display: inline-block;
     font-size: calc(7px + 2vmin);
     color: black;
 }
 
 .logo {
-    height: 40px;
-    width: 40px;
+    height: 3%;
+    width: 3%;
     display: inline-block;
     margin-right: 10px;
 }
 
 .search {
+    padding-top: 5px;
+    width: 15%;
     display: inline-block;
-    vertical-align: top;
-    margin-top: 10px;
 }
 
 .button {
-    margin-left: 10px;
-    margin-right: 10px;
+    vertical-align: bottom;
     display: inline-block;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
 }
 
 .vertical-split-line {
-    vertical-align: top;
-    margin-top:15px;
-    margin-left:40px;
-    margin-right: 40px;
+    vertical-align: bottom;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
     display: inline-block;
-    background-color: #aaaaaa;
     min-width: 1px;
-    min-height: 3vh;
+    min-height: 30px;
 }
 
 .header {
-    margin-top:20px;
-    margin-left:50px;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-bottom: 1%;
     display: block;
     background-color: #ffffff;
     min-height: 7vh;

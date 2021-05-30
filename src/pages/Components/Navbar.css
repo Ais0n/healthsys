@@ -1,20 +1,15 @@
 .navigation {
     display: block;
-    margin-top:0px;
-    margin-left:0px;
     background-color: #3792E2;
-    min-height: 6vh;
     flex-direction: row;
-    font-size: calc(10px + 2vmin);
-    color: black;
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
 }
 
 .sub-navigation {
     display: inline-block;
-    margin-right: 70px;
-    margin-left: 70px;
-    font-size: calc(4px + 2vmin);
-    background: none;
-    border: none;
+    margin-right: 5%;
+    margin-left: 5%;
+    font-size: calc(5px + 2vmin);
     color: white;
 }
