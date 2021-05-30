@@ -12,40 +12,35 @@ import './Mainpage.css'
 import { Typography, Button, Input, Carousel, Radio} from 'antd';
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
+import React from 'react'
 
 const { Title } = Typography;
 
-const onchange = () => {
-    console.log("search")
-    return (
-    <div className="doctor-info-table">
-      <div className="doctor-info">
-          <img className="doctor-profile" src={doctor_profile} alt=""></img>
-          <div className="doctor-info-1">张三</div>
-          <div className="doctor-info-2">神经内科 主治医师</div>
-      </div>
-      <div className="doctor-info">
-          <img className="doctor-profile" src={doctor_profile} alt=""></img>
-          <div className="doctor-info-1">李四</div>
-          <div className="doctor-info-2">骨科 专家医师</div>
-      </div>
-      <div className="doctor-info">
-          <img className="doctor-profile" src={doctor_profile} alt=""></img>
-          <div className="doctor-info-1">王五</div>
-          <div className="doctor-info-2">口腔科 专家医师</div>
-      </div>
-    </div>
-    )
-}
+let doctorList = {  'all':  [{'name': '张三','position': '精神卫生科 主任医师'},
+                                  {'name': '李四','position': '内分泌科 主任医师'},
+                                  {'name': '王五','position': '肾脏病科 主任医师'}],
+                    'depart-a':  [{'name': '张三','position': '精神卫生科 主任医师'}],
+                    'depart-b':  [{'name': '李四','position': '内分泌科 主任医师'}],
+                    'depart-c':  [{'name': '王五','position': '肾脏病科 主任医师'}],
+                    'pm'      :  [{'name': '张三','position': '精神卫生科 主任医师'}],
+                    'am'      :  [{'name': '李四','position': '内分泌科 主任医师'}],
+                    'today'   :  [{'name': '王五','position': '肾脏病科 主任医师'}],
+                    'one-day' :  [{'name': '王五','position': '肾脏病科 主任医师'}],
+                  };
 
-function test(){
-  return (
-    <div>Hello, world </div>
-  );
-}
+let availableDoctorList = doctorList['all'] 
 
-function Mainpage() {
-  return (
+class Mainpage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {'showDoctorList': doctorList['all']}
+    this.onchange = this.onchange.bind(this)
+  }
+
+  onchange(e) {
+    this.setState({'showDoctorList': doctorList[e.target.value]})
+}
+  render() {return (
     <div className="App">
       <Myheader/>
       <Navbar/>
@@ -144,11 +139,11 @@ function Mainpage() {
                   <div className="sub-text-table-title">科室筛选</div>
                   <div className="vertical-split-line-2"/>
                   <div className="sub-text-table-title-2">
-                    <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
-                      <Radio.Button value='a'>全部</Radio.Button>
-                      <Radio.Button value='b'>精神卫生科</Radio.Button>
-                      <Radio.Button value='c'>内分泌科</Radio.Button>
-                      <Radio.Button value='d'>肾脏病科</Radio.Button>
+                    <Radio.Group defaultValue="all" buttonStyle="solid" onChange={this.onchange}>
+                      <Radio.Button value='all'>全部</Radio.Button>
+                      <Radio.Button value='depart-a'>精神卫生科</Radio.Button>
+                      <Radio.Button value='depart-b'>内分泌科</Radio.Button>
+                      <Radio.Button value='depart-c'>肾脏病科</Radio.Button>
                     </Radio.Group>
                   </div>
                 </div>
@@ -157,10 +152,10 @@ function Mainpage() {
                   <div className="sub-text-table-title">就诊日期</div>
                   <div className="vertical-split-line-2"/>
                   <div className="sub-text-table-title-2">
-                    <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
-                      <Radio.Button value='a'>全部</Radio.Button>
-                      <Radio.Button value='b'>今日</Radio.Button>
-                      <Radio.Button value='c'>指定日期</Radio.Button>
+                    <Radio.Group defaultValue="all" buttonStyle="solid" onChange={this.onchange}>
+                      <Radio.Button value='all'>全部</Radio.Button>
+                      <Radio.Button value='today'>今日</Radio.Button>
+                      <Radio.Button value='one-day'>指定日期</Radio.Button>
                     </Radio.Group>
                   </div>
                 </div>
@@ -169,39 +164,31 @@ function Mainpage() {
                   <div className="sub-text-table-title">就诊时段</div>
                   <div className="vertical-split-line-2"/>
                   <div className="sub-text-table-title-2">
-                    <Radio.Group defaultValue="a" buttonStyle="solid" onChange={onchange}>
-                      <Radio.Button value='a'>全部</Radio.Button>
-                      <Radio.Button value='b'>上午</Radio.Button>
-                      <Radio.Button value='c'>下午</Radio.Button>
+                    <Radio.Group defaultValue="all" buttonStyle="solid" onChange={this.onchange}>
+                      <Radio.Button value='all'>全部</Radio.Button>
+                      <Radio.Button value='am'>上午</Radio.Button>
+                      <Radio.Button value='pm'>下午</Radio.Button>
                     </Radio.Group>
                   </div>
                 </div>
               </div>
 
               <div className="doctor-info-table">
-                <div className="doctor-info">
-                    <img className="doctor-profile" src={doctor_profile} alt=""></img>
-                    <div className="doctor-info-1">张三</div>
-                    <div className="doctor-info-2">神经内科 主治医师</div>
-                </div>
-                <div className="doctor-info">
-                    <img className="doctor-profile" src={doctor_profile} alt=""></img>
-                    <div className="doctor-info-1">李四</div>
-                    <div className="doctor-info-2">骨科 专家医师</div>
-                </div>
-                <div className="doctor-info">
-                    <img className="doctor-profile" src={doctor_profile} alt=""></img>
-                    <div className="doctor-info-1">王五</div>
-                    <div className="doctor-info-2">口腔科 专家医师</div>
-                </div>
+                {this.state.showDoctorList.map((item) => {
+                  return (<div className="doctor-info">
+                              <img className="doctor-profile" src={doctor_profile} alt=""></img>
+                              <div className="doctor-info-1">{item['name']}</div>
+                              <div className="doctor-info-2">{item['position']}</div>
+                          </div>);
+                  })
+                }
               </div>
           </div>
       </div>
-      test()
 
       <footer>SE2021 Project</footer>
     </div>
-  );
+  )}
 }
 
 export default Mainpage;
