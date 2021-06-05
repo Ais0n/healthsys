@@ -1,5 +1,5 @@
-import React, { useState , Row} from 'react';
-import { Typography, Button, Input, Form, Checkbox, AutoComplete} from 'antd';
+import React, { useState, Row } from 'react';
+import { Typography, Button, Input, Form, Checkbox, AutoComplete } from 'antd';
 import { Layout } from 'antd'
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
@@ -10,141 +10,130 @@ import '@ant-design/pro-form/dist/form.css';
 
 import { message } from 'antd';
 import ProForm, { ProFormText, ProFormCaptcha, ProFormCheckbox } from '@ant-design/pro-form';
-import { MobileOutlined, MailOutlined } from '@ant-design/icons';
+import { UserOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
 
-const waitTime = (time) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
+// class Login extends React.Component {
+//     constructor(props){
+//         super(props);
+//     }
 
-class Login extends React.Component {
-    constructor(props){
-        super(props);
-    }
+//     verifyCodeSucceed = false;
 
-    verifyCodeSucceed = false;
+//     checkVerifyCode = () => {
+//         //此处应有验证码的处理
+//         // alert('成功，接下来将跳转到新页面.');
+//         // alert("success!");
+//         // alert(this.verifyCodeSucceed);//调用这个东西来获取验证码是否已经划过了
+//         if(this.verifyCodeSucceed){
+//             return true;
+//         }
+//         else{
+//             message.error("请通过验证码确认")
+//             return false;
+//         }
+//     };
 
-    checkVerifyCode = () => {
-        //此处应有验证码的处理
-        // alert('成功，接下来将跳转到新页面.');
-        // alert("success!");
-        // alert(this.verifyCodeSucceed);//调用这个东西来获取验证码是否已经划过了
-        if(this.verifyCodeSucceed){
-            return true;
-        }
-        else{
-            message.error("请通过验证码确认")
-            return false;
-        }
-    };
+//     onFinishFailed = (errorInfo) => {
+//         console.log('Failed:', errorInfo);
+//         alert("请填写所有信息！");
+//     };
+//     getVerifyCodeSuccess = (verifyCodeComponent,success) => {
+//         this.verifyCodeSucceed = success;
+//     }
+//     render(){
+//         return(
+//             <div>
+//                 <Myheader/>
+//                 <Navbar/>
+//                 <div className="loginProForm">
+//                 <ProForm
+//                     onFinish={async (values) => {
+//                         values.remember = (values.remember.length > 0); //因为style的原因，remember是数组，需要修改remember
+//                         console.log(values);
+//                         if(this.checkVerifyCode()){
+//                             login(values).then((res)=>{
+//                                 message.success(res.data.message);
+//                                 this.props.history.push({
+//                                     pathname:"/loginsucceed",
+//                                     userData:{
+//                                         accountId: values.accountId
+//                                     }
+//                                 });
+//                             }, (res)=>{
+//                                 message.error(res.data.loginData.message);
+//                             })
+//                         }
 
-    onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-        alert("请填写所有信息！");
-    };
-    getVerifyCodeSuccess = (verifyCodeComponent,success) => {
-        this.verifyCodeSucceed = success;
-    }
-    render(){
-        return(
-            <div>
-                <Myheader/>
-                <Navbar/>
-                <div className="loginProForm">
-                <ProForm
-                    onFinish={async (values) => {
-                        values.remember = (values.remember.length > 0); //因为style的原因，remember是数组，需要修改remember
-                        console.log(values);
-                        if(this.checkVerifyCode()){
-                            login(values).then((res)=>{
-                                message.success(res.data.message);
-                                this.props.history.push({
-                                    pathname:"/loginsucceed",
-                                    userData:{
-                                        accountId: values.accountId
-                                    }
-                                });
-                            }, (res)=>{
-                                message.error(res.data.loginData.message);
-                            })
-                        }
-                        
-                    }}
-                    submitter={{
-                        searchConfig: {
-                            submitText: '登录',
-                        },
-                        render: (_, dom) => dom.pop(),
-                        submitButtonProps: {
-                            size: 'large',
-                            style: {
-                                width: '100%',
-                            },
-                        }
-                    }}
-                >
-                    <h1 style={{textAlign: 'center'}}>欢迎使用阳光医疗服务平台</h1>
-                    <ProFormText
-                    fieldProps={{
-                        size: 'large',
-                        prefix: <MobileOutlined />,
-                    }}
-                    name="accountId"
-                    placeholder="请输入手机号"
-                    rules={[
-                        {
-                        required: true,
-                        message: '请输入手机号!',
-                        },
-                        {
-                        pattern: /^1\d{10}$/,
-                        message: '不合法的手机号格式!',
-                        },
-                    ]}
-                    />
-                    <ProFormText.Password
-                    fieldProps={{
-                        size: 'large',
-                    }}
-                    name="password"
-                    placeholder="请输入密码"
-                    rules={[
-                        {
-                        required: true,
-                        message: '请输入密码!',
-                        }
-                    ]}
-                    />
-                    <ProFormCheckbox.Group
-                    name="remember"
-                    layout="horizontal"
-                    options={["记住我"]}
-                    />
-                    <Verifycode caller={this}/>
-                </ProForm>
-                </div>
-            </div>
-        );
-    };
-}
+//                     }}
+//                     submitter={{
+//                         searchConfig: {
+//                             submitText: '登录',
+//                         },
+//                         render: (_, dom) => dom.pop(),
+//                         submitButtonProps: {
+//                             size: 'large',
+//                             style: {
+//                                 width: '100%',
+//                             },
+//                         }
+//                     }}
+//                 >
+//                     <h1 style={{textAlign: 'center'}}>欢迎使用阳光医疗服务平台</h1>
+//                     <ProFormText
+//                     fieldProps={{
+//                         size: 'large',
+//                         prefix: <MobileOutlined />,
+//                     }}
+//                     name="accountId"
+//                     placeholder="请输入手机号"
+//                     rules={[
+//                         {
+//                         required: true,
+//                         message: '请输入手机号!',
+//                         },
+//                         {
+//                         pattern: /^1\d{10}$/,
+//                         message: '不合法的手机号格式!',
+//                         },
+//                     ]}
+//                     />
+//                     <ProFormText.Password
+//                     fieldProps={{
+//                         size: 'large',
+//                         prefix: <LockOutlined />
+//                     }}
+//                     name="password"
+//                     placeholder="请输入密码"
+//                     rules={[
+//                         {
+//                         required: true,
+//                         message: '请输入密码!',
+//                         }
+//                     ]}
+//                     />
+//                     <ProFormCheckbox.Group
+//                     name="remember"
+//                     layout="horizontal"
+//                     options={["记住我"]}
+//                     />
+//                     <Verifycode caller={this}/>
+//                 </ProForm>
+//                 </div>
+//             </div>
+//         );
+//     };
+// }
 
 // const { Title } = Typography;
-// const layout = {
-//     labelCol: { span: 9 },
-//     wrapperCol: { span: 6 },
-// };
 // const tailLayout = {
-//     wrapperCol: { offset: 9, span: 6 },
+//     float: 'left'
 // };
 // const submitLayout = {
-//     wrapperCol: {align: "center"},
+//     wrapperCol: { align: "center" },
 //     // offset: 11, span: 6, 
 // };
 // const varifyCodeLayout = {
-//     wrapperCol: {align: "center"},
+//     wrapperCol: { align: "center" },
 // };
 
 // class Login extends React.Component {
@@ -174,7 +163,7 @@ class Login extends React.Component {
 //         else{
 //             alert("请通过验证码确认")
 //         }
-        
+
 //     };
 
 //     onFinishFailed = (errorInfo) => {
@@ -189,11 +178,9 @@ class Login extends React.Component {
 //             <div>
 //                 <Myheader/>
 //                 <Navbar/>
-//                 <div className="loginBox">
-//                 <div  className="loginForm">
 //                 <Form
-//                 {...layout}
 //                 name="basic"
+//                 className="loginForm"
 //                 initialValues={{ remember: true }}
 //                 onFinish={this.onFinish}
 //                 onFinishFailed={this.onFinishFailed}
@@ -214,25 +201,150 @@ class Login extends React.Component {
 //                     <Input.Password />
 //                 </Form.Item>
 
-//                 <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-//                     <Checkbox>记住我</Checkbox>
-//                 </Form.Item>
+//                 <Form.Item>
+//                     <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+//                         <Checkbox>记住我</Checkbox>
+//                     </Form.Item>
 
+//                     <Button type="link" className="login-form-forgot">
+//                         忘记密码
+//                     </Button>
+//                 </Form.Item>
 //                 <Form.Item {...varifyCodeLayout}>
 //                     <Verifycode caller={this}/>
 //                 </Form.Item>
 
-//                 <Form.Item {...submitLayout}>
-//                     <Button type="primary" htmlType="submit" align="center" onClick={login}>
+//                 <Form.Item>
+//                     <Button type="primary" htmlType="submit" align="center" onClick={login} className="login-form-button">
 //                     登录
 //                     </Button>
 //                 </Form.Item>
 //                 </Form>    
-//                 </div>
-//                 </div>
 //             </div>
 //         );
 //     };
 // }
+
+
+class Login extends React.Component {
+    constructor(props){
+        super(props);
+    }
+
+    verifyCodeSucceed = false;
+    checkVerifyCode = () => {
+        //此处应有验证码的处理
+        // alert('成功，接下来将跳转到新页面.');
+        // alert("success!");
+        // alert(this.verifyCodeSucceed);//调用这个东西来获取验证码是否已经划过了
+        if(this.verifyCodeSucceed){
+            return true;
+        }
+        else{
+            message.error("请通过验证码确认")
+            return false;
+        }
+    };
+
+    onFinish = async (values) => {
+        values.remember = (values.remember.length > 0); //因为style的原因，remember是数组，需要修改remember
+        console.log(values);
+        if(this.checkVerifyCode()){
+            login(values).then((res)=>{
+                message.success(res.data.loginData.message);
+                this.props.history.push({
+                    pathname:"/loginsucceed",
+                    query:{
+                        values:values
+                    }
+                });
+            }, (res)=>{
+                if(res.isAxiosError){
+                    message.error("网络异常");
+                } else {
+                    message.error(res.data.loginData.message);   
+                }
+            })
+        }
+    };
+
+    onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+        alert("请填写所有信息！");
+    };
+    getVerifyCodeSuccess = (verifyCodeComponent,success) => {
+        this.verifyCodeSucceed = success;
+    }
+
+    render(){
+        return(
+        <div>
+            <Myheader />
+            <Navbar />
+            <Form
+                name="normal_login"
+                className="loginForm"
+                initialValues={{
+                    remember: true,
+                }}
+                onFinish={this.onFinish}
+                onFinishFailed={this.onFinishFailed}
+            >
+                <h1 style={{textAlign: 'center'}}>欢迎使用阳光医疗服务平台</h1>
+                <Form.Item
+                    name="userId"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入手机号！',
+                        },
+                        {
+                            pattern: /^1\d{10}$/,
+                            message: '不合法的手机号格式!',
+                        },
+                    ]}
+                >
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入手机号" />
+                </Form.Item>
+                <Form.Item
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入密码!',
+                        },
+                    ]}
+                >
+                    <Input
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="请输入密码"
+                    />
+                </Form.Item>
+                <Form.Item>
+                    <Form.Item name="remember" valuePropName="checked" noStyle>
+                        <Checkbox>记住我</Checkbox>
+                    </Form.Item>
+                    <Button type="link" className="login-form-forgot">
+                        忘记密码
+                    </Button>
+                </Form.Item>
+                
+                <Form.Item>
+                    <Verifycode caller={this}/>
+                 </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" className="login-form-button">
+                        登录
+                    </Button>
+                    <div className="no-account">
+                        没有账号？<Button type="link">立即注册！</Button>
+                    </div>
+                </Form.Item>
+            </Form>
+        </div>
+        );
+    }
+};
 
 export default Login;

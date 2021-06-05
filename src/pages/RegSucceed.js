@@ -19,11 +19,9 @@ class RegisterSucceed extends React.Component {
                     <text>这是一个临时页面</text><p></p>
                     <text>register successed</text>
                     <p></p>
-                    <text>username: {this.values.username}</text>
+                    <text>username: {this.values.userId}</text>
                     <p></p>
-                    <text>password: {this.values.password}</text>
-                    <p></p>
-                    <text>contact: {this.values.contact}</text>
+                    <text>gender: {this.values.xingbie}</text>
                 </div>
               
             </div>

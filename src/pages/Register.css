@@ -1,3 +1,8 @@
+.registerProForm {
+    margin: 6% auto;
+    width: 30%;
+}
+
 .registerForm {
     /* display: block; */
     /* margin-top:27px; */
@@ -7,8 +12,8 @@
     position: absolute;
     top:50%;
     left:50%;
-    width:1000px;
-    height:400px;
+    width: 35%;
+    height:50%;
     transform: translate(-50%,-50%);
     /* background: blue; */
     /* background-color: #3792E2;*/
@@ -18,9 +23,30 @@
     /* color: black; */
 }
 
-.registerBox{
+.loginBox{
     position: relative;
     /* background: red; */
     /* width:1080px;*/
     height: 630px; 
+}
+
+.loginProForm {
+    margin: 6% auto;
+    width: 30%;
+}
+
+.login-form-forgot {
+    float: right;
+}
+
+.ant-col-rtl .login-form-forgot {
+    float: left;
+}
+.register-form-button {
+    width: 100%;
+}
+
+.no-account {
+    margin-left: 5px;
+    margin-top: 10px;
 }

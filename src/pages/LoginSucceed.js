@@ -19,7 +19,7 @@ class LoginSucceed extends React.Component {
                 <text>这是一个临时页面</text><p></p>
                     <text>log in successed</text>
                     <p></p>
-                    <text>accountId: {this.values.accountId}</text>
+                    <text>accountId: {this.values.userId}</text>
                     <p></p>
                     <text>password: {this.values.password}</text>
                     <p></p>
