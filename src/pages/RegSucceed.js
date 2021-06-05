@@ -1,32 +1,55 @@
 import React, { useState } from 'react';
-import { Typography, Button, Input, Form, Checkbox} from 'antd';
+import { Typography, Button, Input, Form, Checkbox } from 'antd';
 import { Layout } from 'antd'
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
-
+import './Register.css'
 class RegisterSucceed extends React.Component {
-    values=""
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.values=""+(props.location.query)?props.location.query.values:null;
+        this.state = {
+            msg: ""
+        }
+
     }
-    render(){
-        return(
+    componentDidMount() {
+        this.timeTransition(5);//根据接口返回的时间
+    }
+    timeTransition = (s) => {
+        let timer = null;
+        let _this = this;
+        setTimeout(function f() {
+            if (s >= 0) {
+                let msg = "注册成功，" + s + "秒后跳转到登录页面...";
+                _this.setState({
+                    msg
+                });
+                --s;
+            } else {
+                _this.setState({
+                    msg: ""
+                });
+                clearTimeout(timer);
+                _this.props.history.push({
+                    pathname: "/login",
+                });
+                return;
+            }
+            timer = setTimeout(f, 1000);
+        }, 1000);
+    }
+    render() {
+        return (
             <div>
-            <Myheader/>
-            <Navbar/>
-                <div>
-                    <text>这是一个临时页面</text><p></p>
-                    <text>register successed</text>
-                    <p></p>
-                    <text>username: {this.values.userId}</text>
-                    <p></p>
-                    <text>gender: {this.values.xingbie}</text>
+                <Myheader />
+                <Navbar />
+                <div className="successInfo">
+                    <h1>{this.state.msg}</h1>
                 </div>
-              
+
             </div>
-      )
+        )
     }
 }
-RegisterSucceed.contextTypes = {router:()=>React.PropTypes.func.isRequired};
-export default RegisterSucceed
+RegisterSucceed.contextTypes = { router: () => React.PropTypes.func.isRequired };
+export default RegisterSucceed;

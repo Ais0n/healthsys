@@ -232,6 +232,13 @@ class Login extends React.Component {
     }
 
     verifyCodeSucceed = false;
+
+    jumpToRegister = () => {
+        this.props.history.push({
+            pathname:"/register",
+        });
+    }
+
     checkVerifyCode = () => {
         //此处应有验证码的处理
         // alert('成功，接下来将跳转到新页面.');
@@ -338,7 +345,7 @@ class Login extends React.Component {
                         登录
                     </Button>
                     <div className="no-account">
-                        没有账号？<Button type="link">立即注册！</Button>
+                        没有账号？<Button type="link" onClick={this.jumpToRegister}>立即注册！</Button>
                     </div>
                 </Form.Item>
             </Form>
