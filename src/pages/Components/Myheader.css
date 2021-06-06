@@ -1,9 +1,10 @@
 .title {
     vertical-align: bottom;
-    margin-right: 30%;
+    margin-right: 20%;
     display: inline-block;
     font-size: calc(7px + 2vmin);
     color: black;
+    margin-bottom: 0.5%;
 }
 
 .logo {
@@ -14,25 +15,27 @@
 }
 
 .search {
-    padding-top: 5px;
     width: 15%;
     display: inline-block;
+    vertical-align: middle;
+    margin-top: 0.5%
 }
 
 .button {
-    vertical-align: bottom;
+    vertical-align: middle;
     display: inline-block;
-    margin-left: 0.5%;
-    margin-right: 0.5%;
+    margin-left: 1%;
+    margin-bottom: 0.5%;
 }
 
 .vertical-split-line {
-    vertical-align: bottom;
-    margin-left: 0.5%;
+    vertical-align: middle;
+    margin-left: 2%;
     margin-right: 0.5%;
     display: inline-block;
     min-width: 1px;
     min-height: 30px;
+    color: grey
 }
 
 .header {
@@ -45,4 +48,11 @@
     flex-direction: column;
     font-size: calc(10px + 2vmin);
     color: white;
+}
+
+.info {
+    vertical-align: middle;
+    display: inline-block;
+    font-size: calc(4px + 1.5vmin);
+    color: black;
 }

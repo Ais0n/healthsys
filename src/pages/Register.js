@@ -7,7 +7,7 @@ import Verifycode from './Components/Verifycode'
 import './Register.css'
 import { message } from 'antd';
 import { userRegister } from '../utils/utils'
-import ProForm, { ProFormText, ProFormCaptcha, ProFormCheckbox, ProFormFieldSet } from '@ant-design/pro-form';
+// import ProForm, { ProFormText, ProFormCaptcha, ProFormCheckbox, ProFormFieldSet } from '@ant-design/pro-form';
 import { MobileOutlined, UserOutlined, LockOutlined } from '@ant-design/icons';
 const { Option } = Select;
 const { Title } = Typography;

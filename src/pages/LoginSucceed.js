@@ -3,6 +3,7 @@ import { Typography, Button, Input, Form, Checkbox } from 'antd';
 import { Layout } from 'antd'
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
+import localStorage from 'localStorage'
 import './Login.css'
 
 class LoginSucceed extends React.Component {
@@ -41,6 +42,11 @@ class LoginSucceed extends React.Component {
         }, 1000);
     }
 
+    getUserInfo = () => {
+        let user = JSON.parse(localStorage.getItem("userInfo"));
+        console.log(user);
+    }
+
     render() {
         return (
             <div>
@@ -48,6 +54,7 @@ class LoginSucceed extends React.Component {
                 <Navbar />
                 <div className="successInfo">
                     <h1>{this.state.msg}</h1>
+                    <Button onClick={this.getUserInfo}>test</Button>
                 </div>
 
             </div>

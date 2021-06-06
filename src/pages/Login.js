@@ -7,9 +7,10 @@ import Verifycode from './Components/Verifycode'
 import './Login.css'
 import { login } from '../utils/utils'
 import '@ant-design/pro-form/dist/form.css';
+import localStorage from "localStorage";
 
 import { message } from 'antd';
-import ProForm, { ProFormText, ProFormCaptcha, ProFormCheckbox } from '@ant-design/pro-form';
+// import ProForm, { ProFormText, ProFormCaptcha, ProFormCheckbox } from '@ant-design/pro-form';
 import { UserOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
 
 // class Login extends React.Component {
@@ -259,10 +260,15 @@ class Login extends React.Component {
         if(this.checkVerifyCode()){
             login(values).then((res)=>{
                 message.success(res.data.loginData.message);
+                const userInfo = {
+                    res,
+                    expire: new Date().getTime() + 1000 * 60 * 30
+                };
+                localStorage.setItem("userInfo", JSON.stringify(userInfo)); //存入缓存
                 this.props.history.push({
                     pathname:"/loginsucceed",
                     query:{
-                        values:values
+                        values: res
                     }
                 });
             }, (res)=>{
