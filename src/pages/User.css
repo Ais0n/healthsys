@@ -1,0 +1,39 @@
+.mainStaff {
+    right: 0;
+    width: 82%;
+    display: inline-block;
+    position: absolute;
+}
+
+.mainContent {
+    background-color: #f0f2f5;
+    height: 100%;
+    width: 100%;
+    top: 105px;
+    position: absolute;
+    display: inline-block;
+    bottom: 0;
+}
+
+.sidebar {
+    width: 18%;
+    height: 100%;
+    bottom: 0;
+    position: absolute;
+    background-color: white;
+    display: inline-block;
+    left: 0;
+}
+
+.card {
+    margin: 3% 5% 3% 5%
+}
+
+.infoForm{
+    position: relative;
+}
+
+.changePassword {
+    width: 100%;
+
+}

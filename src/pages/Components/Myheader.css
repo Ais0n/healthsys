@@ -1,15 +1,17 @@
 .title {
-    vertical-align: bottom;
+    vertical-align: middle;
+    margin-bottom: 3px;
     margin-right: 20%;
     display: inline-block;
     font-size: calc(7px + 2vmin);
     color: black;
-    margin-bottom: 0.5%;
 }
 
 .logo {
-    height: 3%;
-    width: 3%;
+    left: 10%;
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
     display: inline-block;
     margin-right: 10px;
 }
@@ -39,15 +41,15 @@
 }
 
 .header {
-    margin-top: 1%;
-    margin-left: 1%;
-    margin-bottom: 1%;
+    padding-top: 1%;
+    padding-left: 1%;
+    padding-bottom: 1%;
     display: block;
     background-color: #ffffff;
-    min-height: 7vh;
     flex-direction: column;
     font-size: calc(10px + 2vmin);
     color: white;
+    height: 65px;
 }
 
 .info {

@@ -23,7 +23,7 @@ class Myheader extends React.Component {
     logout = () => {
         console.log("logout");
         localStorage.removeItem("userInfo");
-        setTimeout(()=>{this.setState({});}, 8000);
+        setTimeout(()=>{this.setState({});}, 3000);
     }
 
     check = () => {

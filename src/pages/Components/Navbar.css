@@ -2,8 +2,7 @@
     display: block;
     background-color: #3792E2;
     flex-direction: row;
-    padding-top: 0.2%;
-    padding-bottom: 0.2%;
+    height: 40px
 }
 
 .sub-navigation {
@@ -12,4 +11,5 @@
     margin-left: 5%;
     font-size: calc(5px + 2vmin);
     color: white;
+    padding-top: 2px;
 }
