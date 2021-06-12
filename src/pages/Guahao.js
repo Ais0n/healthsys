@@ -1,29 +1,25 @@
 import Gheader from '../pic/Gheader.png'
 import doctor_profile from '../pic/default-profile.png'
-import './Mainpage.css'
 import './Guahao.css'
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 
-import { Typography, Button, Input, Carousel, Radio } from 'antd';
+import { Typography, Button, Input, Carousel, Radio, Card } from 'antd';
 
 function Guahao() {
   return (
-    <div className="App">
+    <>
       <Myheader/>
       <Navbar/>
-      <div className="picture">
-        <div>
-          <img className="Gheader" src={Gheader} alt=""></img>
+      <div className="guahaoContent">
+        <div className="picture">
+            <img className="Gheader" src={Gheader} alt=""></img>
         </div>
-      </div>
-
-      <div className="text">
-
-        <div className="text-title">
-          <div className="g-title">名医预约</div>
-          <div className="g-sub-title">上午8:00-12:00，下午14:00-17:30，晚上18:00-21:00</div>
-        </div>
+        <Card className="mainCard">
+          <div className="text-title">
+            <div className="g-title">名医预约</div>
+            <div className="g-sub-title">上午8:00-12:00，下午14:00-17:30，晚上18:00-21:00</div>
+          </div>
         <div className="sub-text-table2">
           <div className="sub-text-table-one-line">
             <div className="g-sub-text-table-title">科室筛选</div>
@@ -99,10 +95,9 @@ function Guahao() {
             <div className="g-button"><Button type="primary">预约</Button></div>
           </div>
         </div>
+        </Card>
       </div>
-
-      <footer>SE2021 Project</footer>
-    </div>
+    </>
   );
 }
 export default Guahao;
