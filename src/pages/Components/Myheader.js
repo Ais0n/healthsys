@@ -30,7 +30,7 @@ class Myheader extends React.Component {
         let storage = JSON.parse(localStorage.getItem("userInfo"));
         let time = new Date().getTime();
         let result = null;
-        console.log(storage);
+        //console.log(storage);
         if (storage) {
             let obj = storage;
             if (time < obj.expire) {
@@ -39,7 +39,7 @@ class Myheader extends React.Component {
                 localStorage.removeItem("userInfo");
             }
         }
-        
+        console.log(result);
         if (result) {
             return (
                 <>
