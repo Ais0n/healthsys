@@ -9,6 +9,7 @@ import { message } from 'antd';
 import { userRegister } from '../utils/utils'
 // import ProForm, { ProFormText, ProFormCaptcha, ProFormCheckbox, ProFormFieldSet } from '@ant-design/pro-form';
 import { MobileOutlined, UserOutlined, LockOutlined } from '@ant-design/icons';
+import Myfooter from './Components/Myfooter';
 const { Option } = Select;
 const { Title } = Typography;
 // const layout = {
@@ -513,6 +514,7 @@ class Register extends React.Component {
                         注册
                     </Button>
                 </Form.Item>
+                <Myfooter/>
             </Form>
             </div>
         );

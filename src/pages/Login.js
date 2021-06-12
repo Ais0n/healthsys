@@ -12,6 +12,7 @@ import localStorage from "localStorage";
 import { message } from 'antd';
 // import ProForm, { ProFormText, ProFormCaptcha, ProFormCheckbox } from '@ant-design/pro-form';
 import { UserOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
+import Myfooter from './Components/Myfooter';
 
 // class Login extends React.Component {
 //     constructor(props){
@@ -354,7 +355,9 @@ class Login extends React.Component {
                         没有账号？<Button type="link" onClick={this.jumpToRegister}>立即注册！</Button>
                     </div>
                 </Form.Item>
+                <Myfooter/>
             </Form>
+            
         </div>
         );
     }

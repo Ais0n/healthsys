@@ -12,6 +12,7 @@ import './Mainpage.css'
 import { Typography, Button, Input, Carousel, Radio} from 'antd';
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
+import Myfooter from './Components/Myfooter'
 
 const { Title } = Typography;
 
@@ -197,9 +198,7 @@ function Mainpage() {
               </div>
           </div>
       </div>
-      test()
-
-      <footer>SE2021 Project</footer>
+      <Myfooter/>
     </div>
   );
 }

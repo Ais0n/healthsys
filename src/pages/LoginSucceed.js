@@ -5,13 +5,14 @@ import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 import localStorage from 'localStorage'
 import './Login.css'
+import Myfooter from './Components/Myfooter';
 
 class LoginSucceed extends React.Component {
     values = ""
     constructor(props) {
         super(props);
         this.state = {
-            msg: ""
+            msg: "正在登录..."
         }
     }
 
@@ -54,9 +55,8 @@ class LoginSucceed extends React.Component {
                 <Navbar />
                 <div className="successInfo">
                     <h1>{this.state.msg}</h1>
-                    <Button onClick={this.getUserInfo}>test</Button>
                 </div>
-
+                <Myfooter/>
             </div>
         )
     }

@@ -4,11 +4,12 @@ import { Layout } from 'antd'
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 import './Register.css'
+import Myfooter from './Components/Myfooter';
 class RegisterSucceed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            msg: ""
+            msg: "正在加载..."
         }
 
     }
@@ -46,7 +47,7 @@ class RegisterSucceed extends React.Component {
                 <div className="successInfo">
                     <h1>{this.state.msg}</h1>
                 </div>
-
+                <Myfooter/>
             </div>
         )
     }
