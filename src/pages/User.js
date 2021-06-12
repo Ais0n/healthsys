@@ -15,6 +15,7 @@ class User extends React.Component {
         super(props);
         this.state = {
             collapsed: false,
+            current: '1',
         };
     }
 
@@ -22,6 +23,20 @@ class User extends React.Component {
         console.log(collapsed);
         this.setState({ collapsed });
     };
+
+    selectCard = () => {
+        switch(this.state.current){
+            case '1':
+                return(
+                    <Card title="修改个人信息" bordered={true} className="card">
+                    <ChangePassword className="changePassword"/>
+                    </Card>
+                );
+            default:
+                return(<div></div>)
+        }
+    }
+
     render() {
         return (
             <>
@@ -30,9 +45,7 @@ class User extends React.Component {
                 <div className="mainContent">
                     <Sidebar className="sidebar" caller={this}/>
                         <div className="mainStaff">
-                        <Card title="修改个人信息" bordered={true} className="card">
-                            <ChangePassword className="changePassword"/>
-                        </Card>
+                            {this.selectCard()}
                         </div>
                 </div>
             </>

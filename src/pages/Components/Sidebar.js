@@ -12,7 +12,6 @@ export default class Sidebar extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            current: '1',
             openKeys: []
         }
     }
@@ -33,12 +32,14 @@ export default class Sidebar extends React.Component{
 
     handleClick = (e) => {
        /*这里要做判断，判断是点击哪个菜单，就跳转到相应的菜单内容，使用router进行跳转*/
-        if(e.key == "1"){
-            this.props.caller.jump();
-        }
-
+        // if(e.key == "1"){
+        //     this.props.caller.jump();
+        // }
+        console.log(e.key);
+        this.props.caller.setState({
+            current: e.key
+        })
         this.setState({
-            current: e.key,
             openKeys: e.keyPath.slice(1)
         });
     }
@@ -71,7 +72,7 @@ export default class Sidebar extends React.Component{
                     selectedKeys={[this.state.current]}
                     style={{ width: "100%" }}
                     onOpenChange={this.onOpenChange}
-                    onClick={this.handleClick.bind(this)} /*触发菜单*/
+                    onClick={this.handleClick} /*触发菜单*/
                     >
                     <SubMenu key="sub1" title="基本设置">
                         <Menu.Item key="1">用户信息</Menu.Item>
