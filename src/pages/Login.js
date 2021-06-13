@@ -256,7 +256,6 @@ class Login extends React.Component {
     };
 
     onFinish = async (values) => {
-        values.remember = (values.remember.length > 0); //因为style的原因，remember是数组，需要修改remember
         console.log(values);
         if(this.checkVerifyCode()){
             login(values).then((res)=>{
@@ -298,9 +297,7 @@ class Login extends React.Component {
             <Form
                 name="normal_login"
                 className="loginForm"
-                initialValues={{
-                    remember: true,
-                }}
+                initialValues={{}}
                 onFinish={this.onFinish}
                 onFinishFailed={this.onFinishFailed}
             >
@@ -335,14 +332,6 @@ class Login extends React.Component {
                         placeholder="请输入密码"
                     />
                 </Form.Item>
-                <Form.Item>
-                    <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>记住我</Checkbox>
-                    </Form.Item>
-                    <Button type="link" className="login-form-forgot">
-                        忘记密码
-                    </Button>
-                </Form.Item>
                 
                 <Form.Item>
                     <Verifycode caller={this}/>
@@ -353,6 +342,9 @@ class Login extends React.Component {
                     </Button>
                     <div className="no-account">
                         没有账号？<Button type="link" onClick={this.jumpToRegister}>立即注册！</Button>
+                        <Button type="link" className="login-form-forgot">
+                        忘记密码
+                    </Button>
                     </div>
                 </Form.Item>
                 <Myfooter/>

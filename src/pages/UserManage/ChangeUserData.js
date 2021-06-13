@@ -16,7 +16,6 @@ export default class ChangeUserData extends React.Component {
                     name="normal_login"
                     className="infoForm"
                     initialValues={{
-                        remember: true,
                     }}
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
