@@ -11,7 +11,8 @@ export function login(data){
             userId: data.userId,
             password: data.password
         }).then((value) => {
-            if(value.data.loginData.loginStatus){
+            console.log(value);
+            if(value.data.status){
                 resolve(value);
             }else{
                 reject(value);
@@ -38,7 +39,7 @@ export function userRegister(data){
             }
         }).then((value) => {
             console.log(value);
-            if(value.data.registerData.registerStatus){
+            if(value.data.status){
                 resolve(value);
             }else{
                 reject(value);

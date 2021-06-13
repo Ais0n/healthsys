@@ -299,7 +299,7 @@ class Register extends React.Component {
         console.log(values);
         if(this.checkVerifyCode()){
             userRegister(values).then((res)=>{
-                message.success(res.data.registerData.message);
+                message.success(res.data.message);
                 this.props.history.push({
                     pathname:"/regsucceed",
                     query:{
@@ -310,7 +310,7 @@ class Register extends React.Component {
                 if(res.isAxiosError){
                     message.error("网络异常");
                 } else {
-                    message.error(res.data.registerData.message);   
+                    message.error(res.data.message);   
                 }
             })
             // this.props.history.push({

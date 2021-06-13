@@ -259,7 +259,7 @@ class Login extends React.Component {
         console.log(values);
         if(this.checkVerifyCode()){
             login(values).then((res)=>{
-                message.success(res.data.loginData.message);
+                message.success(res.data.message);
                 const userInfo = {
                     res,
                     expire: new Date().getTime() + 1000 * 60 * 30
@@ -272,10 +272,11 @@ class Login extends React.Component {
                     }
                 });
             }, (res)=>{
+                console.log(res);
                 if(res.isAxiosError){
                     message.error("网络异常");
                 } else {
-                    message.error(res.data.loginData.message);   
+                    message.error(res.data.message);   
                 }
             })
         }

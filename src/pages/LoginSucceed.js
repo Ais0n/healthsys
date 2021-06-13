@@ -17,7 +17,7 @@ class LoginSucceed extends React.Component {
     }
 
     componentDidMount() {
-        this.timeTransition(5);//根据接口返回的时间
+        this.timeTransition(3);//根据接口返回的时间
     }
     timeTransition = (s) => {
         let timer = null;
