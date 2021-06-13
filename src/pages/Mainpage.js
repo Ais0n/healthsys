@@ -7,12 +7,12 @@ import depart_pic_C from '../pic/depart_C.png'
 import depart_pic_D from '../pic/depart_D.png' 
 import depart_pic_E from '../pic/depart_E.png' 
 import doctor_profile from '../pic/default-profile.png'
+import foot_picture from '../pic/foot_picture.jpg'
 import './Mainpage.css'
 
 import { Typography, Button, Input, Carousel, Radio} from 'antd';
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
-import Myfooter from './Components/Myfooter'
 
 const { Title } = Typography;
 
@@ -183,7 +183,7 @@ function Mainpage() {
                 <div className="doctor-info">
                     <img className="doctor-profile" src={doctor_profile} alt=""></img>
                     <div className="doctor-info-1">张三</div>
-                    <div className="doctor-info-2">神经内科 主治医师</div>
+                    <div className="doctor-info-2">神经科 主治医师</div>
                 </div>
                 <div className="doctor-info">
                     <img className="doctor-profile" src={doctor_profile} alt=""></img>
@@ -195,10 +195,25 @@ function Mainpage() {
                     <div className="doctor-info-1">王五</div>
                     <div className="doctor-info-2">口腔科 专家医师</div>
                 </div>
+                <div className="doctor-info">
+                    <img className="doctor-profile" src={doctor_profile} alt=""></img>
+                    <div className="doctor-info-1">鲁莹</div>
+                    <div className="doctor-info-2">神经科 主治医师</div>
+                </div>
+                <div className="doctor-info">
+                    <img className="doctor-profile" src={doctor_profile} alt=""></img>
+                    <div className="doctor-info-1">夏冰</div>
+                    <div className="doctor-info-2">神经科 主治医师</div>
+                </div>
               </div>
           </div>
       </div>
-      <Myfooter/>
+
+      <div className="picture">
+        <img className="foot_picture" src={foot_picture} alt=""></img>
+      </div>
+
+      <footer>SE2021 Project</footer>
     </div>
   );
 }

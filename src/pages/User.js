@@ -48,8 +48,7 @@ class User extends React.Component {
 
     selectCard = () => {
         let err = 0;
-        let perm = this.checkPermission();
-        if(perm == "guest"){
+        if(this.checkPermission() == "guest"){
             err = 1;
         } else {
             switch(this.state.current){
@@ -62,7 +61,7 @@ class User extends React.Component {
                 case '2':
                     return (
                         <Card title="修改个人信息" bordered={true} className="card">
-                        <ChangeUserData permission={perm} className="changePassword"/>
+                        <ChangeUserData className="changePassword"/>
                         </Card>
                     )
                 default:
