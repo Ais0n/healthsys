@@ -20,14 +20,15 @@
     width: 15%;
     display: inline-block;
     vertical-align: middle;
-    margin-top: 0.5%
+    margin-left:40%;
+    margin-top: 0.5%;
 }
 
 .button {
     vertical-align: middle;
     display: inline-block;
     margin-left: 1%;
-    margin-bottom: 0.5%;
+    margin-bottom:0.6%;
 }
 
 .vertical-split-line {
