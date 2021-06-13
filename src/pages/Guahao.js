@@ -7,7 +7,7 @@ import Navbar from './Components/Navbar'
 import hosp from '../pic/zj1hosp.jpg'
 import doc1 from '../pic/doc1.jpg'
 
-import { Typography, Button, Input, Carousel, Radio, Card, Steps, message, Divider, Space, List, Avatar, Image } from 'antd';
+import { Typography, Button, Input, Carousel, Radio, Card, Steps, message, Divider, Space, List, Avatar, Image, Modal } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import Myfooter from './Components/Myfooter';
 
@@ -48,6 +48,21 @@ const IconText = ({ icon, text }) => (
 
 const Guahao = () => {
   const [current, setCurrent] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [chosenDoctor, setChosenDoctor] = useState({});
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+    next();
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const next = () => {
     setCurrent(current + 1);
@@ -72,8 +87,8 @@ const Guahao = () => {
           ))}
           </Steps>
 
+          {current === 0 && (<>
           <Card className="queryToolbarCard">
-
           <div className="sub-text-table2">
             <Space direction="vertical" style={{width: "100%"}} size="middle">
                 <div className="sub-text-table-one-line">
@@ -158,7 +173,10 @@ const Guahao = () => {
                 key={item.title}
                 actions={[
                   <Button>查看详情</Button>,
-                  <Button>立即预约</Button>
+                  <Button type="primary" onClick={()=>{
+                    setChosenDoctor(item);
+                    setIsModalVisible(true);
+                  }}>立即预约</Button>
                 ]}
                 extra={
                   <img
@@ -179,14 +197,15 @@ const Guahao = () => {
               </List.Item>
             )}
           />
-          </Card>
+          </Card></>)}
+
+          {current === 1 && (<>
+            <Card className="queryToolbarCard" title="确认挂号信息">
+              
+            </Card>
+          </>)}
 
           <div className="steps-action">
-            {current < steps.length - 1 && (
-              <Button type="primary" onClick={() => next()}>
-                下一步
-              </Button>
-            )}
             {current === steps.length - 1 && (
               <Button type="primary" onClick={() => message.success('Processing complete!')}>
                 完成
@@ -201,6 +220,11 @@ const Guahao = () => {
         </div>
       </div>
       <Myfooter/>
+
+
+      <Modal title="预约确认" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        您确定要预约{chosenDoctor.title}医生吗？
+      </Modal>
     </>
   );
 }
