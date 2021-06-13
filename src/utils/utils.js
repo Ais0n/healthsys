@@ -52,3 +52,53 @@ export function userRegister(data){
         })
     })
 }
+
+function getUserInfo(){
+    let storage = JSON.parse(localStorage.getItem("userInfo"));
+    let time = new Date().getTime();
+    let result = null;
+    console.log(storage);
+    if (storage) {
+        let obj = storage;
+        if (time < obj.expire) {
+            result = obj.res.data;
+        } else {
+            localStorage.removeItem("userInfo");
+        }
+    }
+    return result;
+}
+
+export function updateUserInfo(data){
+    console.log(data)
+    return new Promise(function(resolve, reject) {
+        let res = getUserInfo();
+        console.log(res);
+        if(res){
+            instance.post('/user/updateinfo', data, {
+                headers: {
+                    'token': res.token
+                }
+            }).then((value) => {
+                console.log(value);
+                if(value.data.status){
+                    resolve(value);
+                }else{
+                    reject(value);
+                }
+            }).catch((err)=>{
+                // console.log(Object.keys(err))
+                // console.log(err.response);
+                // console.log(err.isAxiosError);
+                reject(err);
+            })
+        } else {
+            reject({
+                data:{
+                    status: false,
+                    message: "会话不存在或已过期，请重新登录！"
+                }
+            })
+        }
+    })
+}
