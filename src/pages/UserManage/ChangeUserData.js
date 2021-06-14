@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb, Card, Button, Form, Upload, Input, Radio, Checkbox, Select, message, Avatar, Image, Space } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, LockOutlined, UploadOutlined } from '@ant-design/icons';
-import { updateUserInfo } from '../../utils/utils';
+import { updateUserInfo, getLoginStatus, getExpireTime } from '../../utils/utils';
 import './ChangePassword.css'
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -65,6 +65,13 @@ export default class ChangeUserData extends React.Component {
         console.log(tmp);
         updateUserInfo(tmp).then((res)=>{
             message.success(res.data.message);
+            getLoginStatus().then((res) =>{
+                let userInfo = {
+                    res,
+                    expire: getExpireTime()
+                };
+                localStorage.setItem("userInfo", JSON.stringify(userInfo)); //存入缓存
+            })
         }, (res)=>{
             if(res.isAxiosError){
                 message.error("网络异常");

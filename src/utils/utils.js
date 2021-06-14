@@ -5,27 +5,27 @@ var instance = axios.create({
     timeout: 2500
 });
 
-export function login(data){
-    return new Promise(function(resolve, reject) {
+export function login(data) {
+    return new Promise(function (resolve, reject) {
         instance.post('/login', {
             userId: data.userId,
             password: data.password
         }).then((value) => {
             console.log(value);
-            if(value.data.status){
+            if (value.data.status) {
                 resolve(value);
-            }else{
+            } else {
                 reject(value);
             }
-        }).catch((err)=>{
+        }).catch((err) => {
             reject(err);
         })
     })
 }
 
-export function userRegister(data){
+export function userRegister(data) {
     console.log(data)
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         instance.post('/register', {
             userId: data.userId,
             password: data.password,
@@ -39,12 +39,12 @@ export function userRegister(data){
             }
         }).then((value) => {
             console.log(value);
-            if(value.data.status){
+            if (value.data.status) {
                 resolve(value);
-            }else{
+            } else {
                 reject(value);
             }
-        }).catch((err)=>{
+        }).catch((err) => {
             // console.log(Object.keys(err))
             // console.log(err.response);
             // console.log(err.isAxiosError);
@@ -53,7 +53,7 @@ export function userRegister(data){
     })
 }
 
-function getUserInfo(){
+function getUserInfo() {
     let storage = JSON.parse(localStorage.getItem("userInfo"));
     let time = new Date().getTime();
     let result = null;
@@ -69,24 +69,24 @@ function getUserInfo(){
     return result;
 }
 
-export function updateUserInfo(data){
+export function updateUserInfo(data) {
     console.log(data)
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         let res = getUserInfo();
         console.log(res);
-        if(res){
+        if (res) {
             instance.post('/user/updateinfo', data, {
                 headers: {
                     'token': res.token
                 }
             }).then((value) => {
                 console.log(value);
-                if(value.data.status){
+                if (value.data.status) {
                     resolve(value);
-                }else{
+                } else {
                     reject(value);
                 }
-            }).catch((err)=>{
+            }).catch((err) => {
                 // console.log(Object.keys(err))
                 // console.log(err.response);
                 // console.log(err.isAxiosError);
@@ -94,11 +94,43 @@ export function updateUserInfo(data){
             })
         } else {
             reject({
-                data:{
+                data: {
                     status: false,
                     message: "会话不存在或已过期，请重新登录！"
                 }
             })
         }
     })
+}
+
+export function getLoginStatus() {
+    console.log("getLoginStatus");
+    return new Promise(function (resolve, reject) {
+        let res = getUserInfo();
+        console.log(res);
+        if (res) {
+            instance.get('/login', { headers: { 'token': res.token } }).then((value) => {
+                console.log(value);
+                if (value.data.status) {
+                    resolve(value);
+                } else {
+                    reject(value);
+                }
+            }).catch((err) => {
+                reject(err);
+            })
+        } else {
+            reject({
+                data: {
+                    status: false,
+                    message: "会话不存在或已过期，请重新登录！"
+                }
+            })
+        }
+    })
+}
+
+export function getExpireTime() {
+    let tmp = new Date().getTime() + 1000 * 60 * 30;
+    return tmp;
 }

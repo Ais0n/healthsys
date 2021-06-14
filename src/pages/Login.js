@@ -5,7 +5,7 @@ import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 import Verifycode from './Components/Verifycode'
 import './Login.css'
-import { login } from '../utils/utils'
+import { getExpireTime, login } from '../utils/utils'
 import '@ant-design/pro-form/dist/form.css';
 import localStorage from "localStorage";
 
@@ -262,7 +262,7 @@ class Login extends React.Component {
                 message.success(res.data.message);
                 const userInfo = {
                     res,
-                    expire: new Date().getTime() + 1000 * 60 * 30
+                    expire: getExpireTime()
                 };
                 localStorage.setItem("userInfo", JSON.stringify(userInfo)); //存入缓存
                 this.props.history.push({
