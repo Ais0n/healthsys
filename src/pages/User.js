@@ -8,6 +8,7 @@ import Navbar from './Components/Navbar'
 import './User.css'
 import ChangePassword from './UserManage/ChangePassword';
 import ChangeUserData from './UserManage/ChangeUserData';
+import QueryRegistration from './UserManage/QueryRegistration';
 import Myfooter from './Components/Myfooter';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -60,6 +61,12 @@ class User extends React.Component {
                     return (
                         <Card title="修改个人信息" bordered={true} className="card">
                         <ChangeUserData userInfo={userInfo} className="changePassword"/>
+                        </Card>
+                    )
+                case '21':
+                    return (
+                        <Card title="挂号查询" bordered={true} className="card">
+                        <QueryRegistration/>
                         </Card>
                     )
                 default:
