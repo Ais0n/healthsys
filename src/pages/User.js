@@ -17,7 +17,7 @@ class User extends React.Component {
         super(props);
         this.state = {
             collapsed: false,
-            current: '1',
+            current: '11',
         };
     }
 
@@ -50,13 +50,13 @@ class User extends React.Component {
             err = 1;
         } else {
             switch(this.state.current){
-                case '1':
+                case '11':
                     return(
                         <Card title="修改密码" bordered={true} className="card">
                         <ChangePassword className="changePassword"/>
                         </Card>
                     );
-                case '2':
+                case '12':
                     return (
                         <Card title="修改个人信息" bordered={true} className="card">
                         <ChangeUserData userInfo={userInfo} className="changePassword"/>

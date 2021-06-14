@@ -75,19 +75,14 @@ export default class Sidebar extends React.Component{
                     onClick={this.handleClick} /*触发菜单*/
                     >
                     <SubMenu key="sub1" title="基本设置">
-                        <Menu.Item key="1">修改密码</Menu.Item>
-                        <Menu.Item key="2">用户信息</Menu.Item>
+                        <Menu.Item key="11">修改密码</Menu.Item>
+                        <Menu.Item key="12">用户信息</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub2" title="用户服务">
-                        <Menu.Item key="7">app版本查询</Menu.Item>
-                        <SubMenu key="sub3" title="app配置版本查询">
-                            <Menu.Item key="3">导航配置查询</Menu.Item>
-                            <Menu.Item key="4">广告配置查询</Menu.Item>
-                        </SubMenu>
-                        <Menu.Item key="5">app changeLog</Menu.Item>
+                    <SubMenu key="sub2" title="记录查询">
+                        <Menu.Item key="21">挂号查询</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub4" title="用户服务">
-                        <Menu.Item key="6">设置权限</Menu.Item>
+                    <SubMenu key="sub4" title="用户管理">
+                        <Menu.Item key="31">审核医生</Menu.Item>
                     </SubMenu>
                 </Menu>
             </div>
