@@ -60,7 +60,7 @@ export default class ChangeUserData extends React.Component {
 
     onFinish = async (values) => {
         var tmp = {};
-        tmp["userId"] = this.props.userInfo.userData.userId;
+        tmp["userId"] = "";
         tmp["userInfo"] = values;
         console.log(tmp);
         updateUserInfo(tmp).then((res)=>{
@@ -83,7 +83,6 @@ export default class ChangeUserData extends React.Component {
                     initialValues={{
                     }}
                     onFinish={this.onFinish}
-                    onFinishFailed={this.onFinishFailed}
                 >
                     
                     <Form.Item
