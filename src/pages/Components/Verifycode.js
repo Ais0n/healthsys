@@ -95,10 +95,10 @@ class Verifycode extends React.Component {
     }
     render(){
         return(
-            <div class="verifycodedrag">
-                <div class="verifycodebg"></div>
-                <div class="verifycodetext" onselectstart="return false;">请拖动滑块验证</div>
-                <div class="verifycodebtn" onMouseDown={this.verifycode_btn_onmousedown} onMouseUp={this.toCaller} >&gt;&gt;</div>
+            <div className="verifycodedrag">
+                <div className="verifycodebg"></div>
+                <div className="verifycodetext" onselectstart="return false;">请拖动滑块验证</div>
+                <div className="verifycodebtn" onMouseDown={this.verifycode_btn_onmousedown} onMouseUp={this.toCaller} >&gt;&gt;</div>
             </div>
         )
     }

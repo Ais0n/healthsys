@@ -38,7 +38,7 @@ export default class QueryRegistration extends React.Component {
                     dataSource={this.listData}
                     renderItem={item => (
                         <List.Item
-                        key={item.data}
+                        key={item.date}
                         >
                         
                         <List.Item.Meta

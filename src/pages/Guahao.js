@@ -8,9 +8,10 @@ import hosp from '../pic/zj1hosp.jpg'
 import doc1 from '../pic/doc1.jpg'
 import {withRouter} from 'react-router-dom'
 
-import { Typography, Button, Input, Descriptions, Radio, Card, Steps, message, Divider, Space, List, Avatar, Image, Modal, Result } from 'antd';
+import { Empty, Button, Input, Descriptions, Radio, Card, Steps, message, Divider, Space, List, Avatar, Image, Modal, Result, Alert } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import Myfooter from './Components/Myfooter';
+import { queryDoctor } from '../utils/utils';
 
 const { Step } = Steps;
 
@@ -52,11 +53,14 @@ class Guahao extends React.Component{
     super(props);
     this.state = {
       current: 0,
+      firstRender: true,
       isModalVisible: false,
       chosenDoctor: {},
-      chosenKeshi: "",
-      chosenDate: "",
-      chosenWubie: ""
+      chosenKeshi: "精神卫生科",
+      chosenDate: this.getFullDateOption(0),
+      chosenWubie: "上午",
+      chosenIsSpecialist: false,
+      itemList: []
     }
   }
 
@@ -109,96 +113,74 @@ class Guahao extends React.Component{
     });
   }
 
+  onChangeIsSpecialist = (e) => {
+    this.setState({
+      chosenIsSpecialist: e.target.value
+    });
+  }
+
   jump = (path) => {
     const { history } = this.props;
     history.push(path);
     console.log(this.props.history);
   }
 
-  render(){
-    return (
-      <>
-        <Myheader/>
-        <Navbar/>
-        <div className="guahaoContent">
-          <div className="picture">
-              <img className="Gheader" src={Gheader} alt=""></img>
-          </div>
-          <div className="mainCard">
-            <Steps current={this.state.current}>
-            {steps.map(item => (
-              <Step key={item.title} title={item.title} />
-            ))}
-            </Steps>
+  getDateOption = (delta) => {
+    var today = new Date();
+    today.setDate(today.getDate()+delta);
+    let month = today.getMonth()+1;
+    let day = today.getDate();
+    return `${month}月${day}日`;
+  }
 
-            {this.state.current === 0 && (<>
-            <Card className="queryToolbarCard">
-            <div className="sub-text-table2">
-              <Space direction="vertical" style={{width: "100%"}} size="middle">
-                  <div className="sub-text-table-one-line">
-                    <div className="g-sub-text-table-title">科室筛选</div>
-                    <Divider type="vertical" className="g-vertical-split-line"/>
-                    <div className="g-sub-text-table-title-2">
-                        <Radio.Group defaultValue="b" buttonStyle="solid" onChange={this.onChangeKeshi}>
-                          <Space size={[8, 14]} wrap>
-                            <Radio.Button value='b'>精神卫生科</Radio.Button>
-                            <Radio.Button value='c'>内分泌科</Radio.Button>
-                            <Radio.Button value='d'>肾脏病科</Radio.Button>
-                            <Radio.Button value='e'>骨科</Radio.Button>
-                            <Radio.Button value='f'>口腔科</Radio.Button>
-                            <Radio.Button value='g'>精神卫生科</Radio.Button>
-                            <Radio.Button value='h'>内分泌科</Radio.Button>
-                            <Radio.Button value='i'>肾脏病科</Radio.Button>
-                            <Radio.Button value='j'>骨科</Radio.Button>
-                            <Radio.Button value='k'>口腔科</Radio.Button>
-                            <Radio.Button value='l'>精神卫生科</Radio.Button>
-                            <Radio.Button value='m'>内分泌科</Radio.Button>
-                            <Radio.Button value='n'>肾脏病科</Radio.Button>
-                            <Radio.Button value='o'>骨科</Radio.Button>
-                            <Radio.Button value='p'>口腔科</Radio.Button>
-                          </Space>
-                        </Radio.Group>
-                      
-                    </div>
-                  </div>
-                
-                  <div className="sub-text-table-one-line">
-                    <div className="g-sub-text-table-title">就诊日期</div>
-                    <Divider type="vertical" className="g-vertical-split-line"/>
-                    <div className="g-sub-text-table-title-2">
-                      <Radio.Group defaultValue="b" buttonStyle="solid" onChange={this.onChangeDate}>
-                        <Space size={[8, 16]} wrap>
-                          <Radio.Button value='b'>今日</Radio.Button>
-                          <Radio.Button value='c'>指定日期</Radio.Button>
-                        </Space>
-                      </Radio.Group>
-                    </div>
-                  </div>
+  getFullDateOption = (delta) => {
+    var today = new Date();
+    today.setDate(today.getDate()+delta);
+    let year = today.getFullYear();
+    let month = today.getMonth()+1;
+    let day = today.getDate();
+    return `${year}-${month}-${day}`;
+  }
+  
+  handleQuery = () => {
+    let data = {
+      date: this.state.chosenDate,
+      keshi: this.state.chosenKeshi,
+      wubie: this.state.chosenWubie,
+      isSpecialist: this.state.chosenIsSpecialist
+    }
+    queryDoctor(data).then( (res) => {
+      message.success(res.data.message);
+      this.setState({
+        firstRender: false,
+        itemList: res.data.doctorInfo
+      });
+    }, (res) => {
+      message.error(res.data.message);
+      this.setState({
+        firstRender: false,
+        itemList: []
+      });
+    }).catch((err) => {
+      message.error(err);
+      this.setState({
+        firstRender: false,
+        itemList: []
+      });
+    })
+  }
 
-                  <div className="sub-text-table-one-line">
-                    <div className="g-sub-text-table-title">就诊时段</div>
-                    <Divider type="vertical" className="g-vertical-split-line"/>
-                    <div className="g-sub-text-table-title-2">
-                      <Radio.Group defaultValue="b" buttonStyle="solid" onChange={this.onChangeWubie}>
-                        <Space size={[8, 16]} wrap>
-                          <Radio.Button value='b'>上午</Radio.Button>
-                          <Radio.Button value='c'>下午</Radio.Button>
-                        </Space>
-                      </Radio.Group>
-                    </div>
-                  </div>
-
-                  <div className="toolbarGroup">
-                    <Space type="horizontal" size="middle">
-                      <Button type="primary" className="toolbarButton">查询</Button>
-                      <Button className="toolbarButton">重置</Button>
-                    </Space>
-                  </div>
-              </Space>
-            </div>
-            </Card>
-
-            <Card className="resultCard">
+  selectResultCard = () => {
+    if(this.state.firstRender) {
+      return (
+        <div style={{textAlign: "center"}}>请点击查询按钮开始搜索</div>
+      )
+    } else {
+        let itemList = this.state.itemList;
+        if(itemList.length == 0 ){
+          return (<Empty description="暂无数据"/>);
+        } else {
+          return (
             <List
               itemLayout="vertical"
               size="large"
@@ -240,6 +222,114 @@ class Guahao extends React.Component{
                 </List.Item>
               )}
             />
+          );
+        }
+      }
+    }
+
+  render(){
+    return (
+      <>
+        <Myheader/>
+        <Navbar/>
+        <div className="guahaoContent">
+          <div className="picture">
+              <img className="Gheader" src={Gheader} alt=""></img>
+          </div>
+          <div className="mainCard">
+            <Steps current={this.state.current}>
+            {steps.map(item => (
+              <Step key={item.title} title={item.title} />
+            ))}
+            </Steps>
+
+            {this.state.current === 0 && (<>
+            <Card className="queryToolbarCard">
+            <div className="sub-text-table2">
+              <Space direction="vertical" style={{width: "100%"}} size="middle">
+                  <div className="sub-text-table-one-line">
+                    <div className="g-sub-text-table-title">科室筛选</div>
+                    <Divider type="vertical" className="g-vertical-split-line"/>
+                    <div className="g-sub-text-table-title-2">
+                        <Radio.Group defaultValue={this.state.chosenKeshi} buttonStyle="solid" onChange={this.onChangeKeshi}>
+                          <Space size={[8, 14]} wrap>
+                            <Radio.Button value='精神卫生科'>精神卫生科</Radio.Button>
+                            <Radio.Button value='内分泌科'>内分泌科</Radio.Button>
+                            <Radio.Button value='肾脏病科'>肾脏病科</Radio.Button>
+                            <Radio.Button value='骨科'>骨科</Radio.Button>
+                            <Radio.Button value='口腔科'>口腔科</Radio.Button>
+                            <Radio.Button value='眼科'>眼科</Radio.Button>
+                            <Radio.Button value='普通外科'>普通外科</Radio.Button>
+                            <Radio.Button value='普通内科'>普通内科</Radio.Button>
+                            <Radio.Button value='放射科'>放射科</Radio.Button>
+                            <Radio.Button value='检验科'>检验科</Radio.Button>
+                            <Radio.Button value='耳鼻喉科'>耳鼻喉科</Radio.Button>
+                            <Radio.Button value='急诊科'>急诊科</Radio.Button>
+                            <Radio.Button value='妇科'>妇科</Radio.Button>
+                            <Radio.Button value='肛肠科'>肛肠科</Radio.Button>
+                            <Radio.Button value='保健科'>保健科</Radio.Button>
+                          </Space>
+                        </Radio.Group>
+                      
+                    </div>
+                  </div>
+                
+                  <div className="sub-text-table-one-line">
+                    <div className="g-sub-text-table-title">就诊日期</div>
+                    <Divider type="vertical" className="g-vertical-split-line"/>
+                    <div className="g-sub-text-table-title-2">
+                      <Radio.Group defaultValue={this.state.chosenDate} buttonStyle="solid" onChange={this.onChangeDate}>
+                        <Space size={[8, 16]} wrap>
+                          <Radio.Button value={this.getFullDateOption(0)}>{this.getDateOption(0)}</Radio.Button>
+                          <Radio.Button value={this.getFullDateOption(1)}>{this.getDateOption(1)}</Radio.Button>
+                          <Radio.Button value={this.getFullDateOption(2)}>{this.getDateOption(2)}</Radio.Button>
+                          <Radio.Button value={this.getFullDateOption(3)}>{this.getDateOption(3)}</Radio.Button>
+                          <Radio.Button value={this.getFullDateOption(4)}>{this.getDateOption(4)}</Radio.Button>
+                          <Radio.Button value={this.getFullDateOption(5)}>{this.getDateOption(5)}</Radio.Button>
+                          <Radio.Button value={this.getFullDateOption(6)}>{this.getDateOption(6)}</Radio.Button>
+                        </Space>
+                      </Radio.Group>
+                    </div>
+                  </div>
+
+                  <div className="sub-text-table-one-line">
+                    <div className="g-sub-text-table-title">就诊时段</div>
+                    <Divider type="vertical" className="g-vertical-split-line"/>
+                    <div className="g-sub-text-table-title-2">
+                      <Radio.Group defaultValue={this.state.chosenWubie} buttonStyle="solid" onChange={this.onChangeWubie}>
+                        <Space size={[8, 16]} wrap>
+                          <Radio.Button value='上午'>上午</Radio.Button>
+                          <Radio.Button value='下午'>下午</Radio.Button>
+                        </Space>
+                      </Radio.Group>
+                    </div>
+                  </div>
+
+                  <div className="sub-text-table-one-line">
+                    <div className="g-sub-text-table-title">挂号类型</div>
+                    <Divider type="vertical" className="g-vertical-split-line"/>
+                    <div className="g-sub-text-table-title-2">
+                      <Radio.Group defaultValue={this.state.chosenIsSpecialist} buttonStyle="solid" onChange={this.onChangeIsSpecialist}>
+                        <Space size={[8, 16]} wrap>
+                          <Radio.Button value={false}>普通门诊</Radio.Button>
+                          <Radio.Button value={true}>专家门诊</Radio.Button>
+                        </Space>
+                      </Radio.Group>
+                    </div>
+                  </div>
+
+                  <div className="toolbarGroup">
+                    <Space type="horizontal" size="middle">
+                      <Button type="primary" className="toolbarButton" onClick={this.handleQuery}>查询</Button>
+                      <Button className="toolbarButton">重置</Button>
+                    </Space>
+                  </div>
+              </Space>
+            </div>
+            </Card>
+
+            <Card className="resultCard">
+              {this.selectResultCard()}
             </Card></>)}
 
             {this.state.current === 1 && (<>
