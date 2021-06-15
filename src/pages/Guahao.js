@@ -139,7 +139,8 @@ class Guahao extends React.Component{
     let year = today.getFullYear();
     let month = today.getMonth()+1;
     let day = today.getDate();
-    return `${year}-${month}-${day}`;
+    let zero = (month<10) ? '0' : '';
+    return `${year}-${zero}${month}-${day}`;
   }
   
   handleQuery = () => {
@@ -190,10 +191,10 @@ class Guahao extends React.Component{
                 },
                 pageSize: 3,
               }}
-              dataSource={listData}
+              dataSource={itemList}
               renderItem={item => (
                 <List.Item
-                  key={item.title}
+                  key={item.userId}
                   actions={[
                     <Button>查看详情</Button>,
                     <Button type="primary" onClick={()=>{
@@ -214,12 +215,12 @@ class Guahao extends React.Component{
                 >
                   
                   <List.Item.Meta
-                    avatar={<Avatar size={100} src={doc1}/>}
-                    title={item.title}
-                    description={item.description}
-                  />
-                  {item.content}
-                </List.Item>
+                        avatar={<Avatar size={100} src={`http://localhost:8000/images/${item.avatar}`}/>}
+                        title={item.name}
+                        description={`${item.age}岁 | ${item.hospitalName} | ${item.keshi} | 从医${item.workYears}年`}
+                    />
+                    {item.description}
+                  </List.Item>
               )}
             />
           );

@@ -30,7 +30,7 @@ export default class ChangeUserData extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            avatarFileName: "error"
+            avatarFileName: props.userInfo.userData.userInfo.avatar
         };
     }
 
@@ -60,6 +60,7 @@ export default class ChangeUserData extends React.Component {
     status = this.props.userInfo.userData.userStatus;
 
     onFinish = async (values) => {
+        if(values.avatar) values.avatar = this.state.avatarFileName;
         var tmp = {};
         tmp["userId"] = "";
         tmp["userInfo"] = values;

@@ -48,7 +48,7 @@ export default class ApproveDoctor extends React.Component {
                     <List.Item.Meta
                         avatar={<Avatar size={100} src={`http://localhost:8000/images/${item.avatar}`}/>}
                         title={item.userName}
-                        description={`${item.userInfo.xingbie} | ${item.userInfo.age}岁 | ${item.userInfo.hospitalName} | ${item.userInfo.keshi} | 从医${item.userInfo.workYears}年`}
+                        description={`${item.userInfo.age}岁 | ${item.userInfo.hospitalName} | ${item.userInfo.keshi} | 从医${item.userInfo.workYears}年`}
                     />
                     {item.userInfo.description}
                     </List.Item>

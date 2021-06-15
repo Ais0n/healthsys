@@ -446,8 +446,8 @@ class Register extends React.Component {
                     ]}
                 >
                     <Select placeholder="请选择所属医院">
-                    <Option value="zheyi">浙一医院</Option>
-                    <Option value="zheer">浙二医院</Option>
+                    <Option value="浙一医院">浙一医院</Option>
+                    <Option value="浙二医院">浙二医院</Option>
                     </Select>
                 </Form.Item>
 
