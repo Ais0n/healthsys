@@ -11,7 +11,7 @@ import {withRouter} from 'react-router-dom'
 import { Empty, Button, Input, Descriptions, Radio, Card, Steps, message, Divider, Space, List, Avatar, Image, Modal, Result, Alert } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import Myfooter from './Components/Myfooter';
-import { queryDoctor } from '../utils/utils';
+import { createRegistration, queryDoctor } from '../utils/utils';
 
 const { Step } = Steps;
 
@@ -226,7 +226,148 @@ class Guahao extends React.Component{
           );
         }
       }
+  }
+
+  check = (itemName) => {
+    let storage = JSON.parse(localStorage.getItem(itemName));
+    let time = new Date().getTime();
+    let result = null;
+    console.log(storage);
+    if (storage) {
+        let obj = storage;
+        if (time < obj.expire) {
+            result = obj.res.data;
+        } else {
+            localStorage.removeItem(itemName);
+        }
     }
+    return result;
+  }
+
+  renderStepTwo = () => {
+    let userInfo = this.check("userInfo");
+    if(userInfo) {
+      return (
+        <>
+          <Card className="queryToolbarCard" title="确认挂号信息">
+            <Space direction="vertical" style={{width: "90%", margin:"auto 5%"}} size="middle">
+              <Descriptions title="医生信息" size="default" style={{"marginBottom": "50px"}}>
+              <Descriptions.Item label=""><Avatar size={100} src={`http://localhost:8000/images/${this.state.chosenDoctor.avatar}`}/></Descriptions.Item>
+                <Descriptions.Item label="医生姓名">{this.state.chosenDoctor.name}</Descriptions.Item>
+                <Descriptions.Item label="年龄">{this.state.chosenDoctor.age+"岁"}</Descriptions.Item>
+                <Descriptions.Item label="科室">{this.state.chosenDoctor.keshi}</Descriptions.Item>
+                <Descriptions.Item label="所在医院">{this.state.chosenDoctor.hospitalName}</Descriptions.Item>
+              </Descriptions>
+
+              <Descriptions title="患者信息" size="default" style={{"marginBottom": "50px"}}>
+                <Descriptions.Item label="患者姓名">{userInfo.userData.userName}</Descriptions.Item>
+                <Descriptions.Item label="年龄">{userInfo.userData.userInfo.age+"岁"}</Descriptions.Item>
+              </Descriptions>
+
+              <Descriptions title="挂号信息" size="default" style={{"marginBottom": "50px"}}>
+                <Descriptions.Item label="就诊日期">{this.state.chosenDate}</Descriptions.Item>
+                <Descriptions.Item label="午别">{this.state.chosenWubie}</Descriptions.Item>
+              </Descriptions>
+            </Space>
+
+            <Button type="primary" style={{ margin: '0 8px' }} onClick={this.handleSubmitRegistration}>
+                确认
+            </Button>
+            <Button style={{ margin: '0 8px' }} onClick={() => this.prev()}>
+                返回
+            </Button>
+          </Card>
+        </>
+      )
+    } else {
+      return (
+        <Card className="queryToolbarCard" title="确认挂号信息">
+          <Empty description="暂无数据"></Empty>
+        </Card>
+      )
+    }
+  }
+
+  handleSubmitRegistration = (e) => {
+    console.log(this.state.current)
+    let userInfo = this.check("userInfo");
+    if(userInfo) {
+      let data = {
+        "keshi": this.state.chosenKeshi,
+        "wubie": this.state.chosenWubie,
+        "date": this.state.chosenDate,
+        "doctorId": this.state.chosenDoctor.userId,
+        "userId": userInfo.userData.userId,
+        "isSpecialist": this.state.chosenDoctor.isSpecialist
+      }
+      createRegistration(data).then((res) => {
+        message.success(res.data.message);
+        this.setState({
+          current: this.state.current+1,
+          ok: "0"
+        })
+      }, (res) => {
+        message.error(res.data.message);
+        this.setState({
+          current: this.state.current+1,
+          ok: res.data.message
+        })
+      }).catch((err)=>{
+        message.error(err);
+        this.setState({
+          current: this.state.current+1,
+          ok: "1"
+        })
+      })
+    }
+  }
+
+  renderStepThree = () => {
+    if(this.state.ok == "0") {
+      return (
+        <Card className="queryToolbarCard">
+        <Result
+          status="success"
+          title="挂号成功"
+          subTitle="请携带个人身份证件按时进行就诊，可在【个人中心】查看挂号详情"
+          extra={[
+            <Button type="primary" onClick={(e)=>{this.jump("/user")}}>
+              前往个人中心
+            </Button>,
+            <Button onClick={(e)=>{this.jump("/")}}>
+              返回首页
+            </Button>
+          ]}
+        />
+      </Card>);
+    } else if(this.state.ok == "1"){
+      return (<Card className="queryToolbarCard">
+        <Result
+          status="error"
+          title="挂号失败"
+          subTitle="请重试"
+          extra={[
+            <Button onClick={(e)=>{this.prev()}}>
+              返回
+            </Button>
+          ]}
+        />
+      </Card>)
+    } else {
+      return (<Card className="queryToolbarCard">
+        <Result
+          status="error"
+          title="挂号失败"
+          subTitle={this.state.ok}
+          extra={[
+            <Button onClick={(e)=>{this.prev()}}>
+              返回
+            </Button>
+          ]}
+        />
+      </Card>)
+    }
+  }
 
   render(){
     return (
@@ -334,42 +475,11 @@ class Guahao extends React.Component{
             </Card></>)}
 
             {this.state.current === 1 && (<>
-              <Card className="queryToolbarCard" title="确认挂号信息">
-                <Space direction="vertical" style={{width: "90%", margin:"auto 5%"}} size="middle">
-                  <Descriptions title="医生信息" size="default" style={{"marginBottom": "50px"}}>
-                    <Descriptions.Item label="医生姓名">{this.state.chosenDoctor.title}</Descriptions.Item>
-                    <Descriptions.Item label="科室">{this.state.chosenKeshi}</Descriptions.Item>
-                    <Descriptions.Item label=""><Avatar size={100} src={doc1}/></Descriptions.Item>
-                  </Descriptions>
-
-                  <Descriptions title="患者信息" size="default" style={{"marginBottom": "50px"}}>
-                    <Descriptions.Item label="患者姓名">张三</Descriptions.Item>
-                  </Descriptions>
-                </Space>
-
-                <Button type="primary" style={{ margin: '0 8px' }} onClick={() => this.next()}>
-                    确认
-                </Button>
-                <Button style={{ margin: '0 8px' }} onClick={() => this.prev()}>
-                    返回
-                </Button>
-              </Card>
+              {this.renderStepTwo()}
             </>)}
 
             {this.state.current === steps.length - 1 && (<>
-              <Result
-                status="success"
-                title="挂号成功"
-                subTitle="请携带个人身份证件按时进行就诊，可在【个人中心】查看挂号详情"
-                extra={[
-                  <Button type="primary" onClick={(e)=>{this.jump("/user")}}>
-                    前往个人中心
-                  </Button>,
-                  <Button onClick={(e)=>{this.jump("/")}}>
-                    返回首页
-                  </Button>
-                ]}
-              />
+              {this.renderStepThree()}
             </>)}
           </div>
         </div>
