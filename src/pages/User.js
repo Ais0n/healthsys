@@ -10,6 +10,8 @@ import ChangePassword from './UserManage/ChangePassword';
 import ChangeUserData from './UserManage/ChangeUserData';
 import QueryRegistration from './UserManage/QueryRegistration';
 import Myfooter from './Components/Myfooter';
+import SetRegistrationTime from './UserManage/SetRegistrationTime';
+import ApproveDoctor from './UserManage/ApproveDoctor';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -67,6 +69,18 @@ class User extends React.Component {
                     return (
                         <Card title="挂号查询" bordered={true} className="card">
                         <QueryRegistration/>
+                        </Card>
+                    )
+                case '32':
+                    return (
+                        <Card title="设置就诊时间" bordered={true} className="card">
+                        <SetRegistrationTime/>
+                        </Card>
+                    )
+                case '41':
+                    return (
+                        <Card title="审核医生" bordered={true} className="card">
+                        <ApproveDoctor/>
                         </Card>
                     )
                 default:

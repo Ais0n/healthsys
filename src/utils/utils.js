@@ -190,3 +190,65 @@ export function queryDoctor(data) {
         }
     })
 }
+
+export function queryNewDoctor() {
+    return new Promise(function (resolve, reject) {
+        let res = getUserInfo();
+        console.log(res);
+        if (res) {
+            instance.get('/doctor/new', {
+                headers: { 'token': res.token }
+            }).then((value) => {
+                console.log(value);
+                if (value.data.status) {
+                    resolve(value);
+                } else {
+                    reject(value);
+                }
+            }).catch((err) => {
+                reject({
+                    data: {
+                        status: false,
+                        message: "网络错误或权限不足"
+                    }
+                })
+            })
+        } else {
+            reject({
+                data: {
+                    status: false,
+                    message: "会话不存在或已过期，请重新登录！"
+                }
+            })
+        }
+    })
+}
+
+export function approveNewDoctor(data) {
+    console.log(data);
+    return new Promise(function (resolve, reject) {
+        let res = getUserInfo();
+        console.log(res);
+        if (res) {
+            instance.post('/doctor/new', data, {
+                headers: { 'token': res.token }
+            }).then((value) => {
+                console.log(value);
+                if (value.data.status) {
+                    resolve(value);
+                } else {
+                    reject(value);
+                }
+            }).catch((err) => {
+                reject(err);
+            })
+        } else {
+            reject({
+                data: {
+                    status: false,
+                    message: "会话不存在或已过期，请重新登录！"
+                }
+            })
+        }
+    })
+}
