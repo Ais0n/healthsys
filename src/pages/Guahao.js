@@ -291,14 +291,15 @@ class Guahao extends React.Component{
   handleSubmitRegistration = (e) => {
     console.log(this.state.current)
     let userInfo = this.check("userInfo");
+    console.log("doctor", this.state.chosenDoctor)
     if(userInfo) {
       let data = {
         "keshi": this.state.chosenKeshi,
         "wubie": this.state.chosenWubie,
         "date": this.state.chosenDate,
-        "doctorId": this.state.chosenDoctor.userId,
+        "doctorId": this.state.chosenDoctor.id,
         "userId": userInfo.userData.userId,
-        "isSpecialist": this.state.chosenDoctor.isSpecialist
+        "isSpecialist": this.state.chosenIsSpecialist
       }
       createRegistration(data).then((res) => {
         message.success(res.data.message);

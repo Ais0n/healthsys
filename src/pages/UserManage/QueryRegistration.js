@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Card, Button, Form, Input, Radio, Checkbox, Select, List, message, Empty } from 'antd';
+import { Layout, Menu, Breadcrumb, Card, Button, Form, Input, Radio, Checkbox, Select, List, message, Empty, Skeleton, Descriptions } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, LockOutlined } from '@ant-design/icons';
 import './ChangePassword.css'
 import { queryRegistrationInfo } from '../../utils/utils';
@@ -9,24 +9,37 @@ const { SubMenu } = Menu;
 export default class QueryRegistration extends React.Component {
     constructor(props){
         super(props);
-        this.status = false;
-        this.listData = [];
+        this.state = {
+            status: false,
+            listData: []
+        }
+    }
+
+    componentDidMount() {
         queryRegistrationInfo().then((tmp) => {
-            this.status = tmp.status;
-            this.listData = tmp.registrationInfo;
+            let listData = tmp.data.registrationInfo;
+            this.setState({
+                listData: listData,
+                status: true
+            });
         }, (tmp) => {
-            this.status = tmp.status;
-            message.error("查询失败");
+            message.error(tmp.data.message);
+            this.setState({
+                status: true
+            })
         }).catch(err => {
             message.error(err);
+            this.setState({
+                status: true
+            })
         })
     }
 
-    render() {
-        return (
-            <>
-                { this.listData.length > 0 ?
-                <List
+    renderList = () => {
+        if(this.state.status) {
+            if(this.state.listData.length > 0){
+                return (
+                    <List
                     itemLayout="vertical"
                     size="large"
                     pagination={{
@@ -35,23 +48,40 @@ export default class QueryRegistration extends React.Component {
                         },
                         pageSize: 3,
                     }}
-                    dataSource={this.listData}
+                    dataSource={this.state.listData}
                     renderItem={item => (
                         <List.Item
                         key={item.date}
                         >
                         
                         <List.Item.Meta
-                            title={"abc"}
-                            description={"abc"}
+                        title={item.date}
+                        description={`${item.hospitalName} | ${item.keshi} | ${item.doctorName} 医师`}
                         />
-                        {item.content}
+                            <Descriptions size="default">
+                                <Descriptions.Item label="午别">{item.wubie}</Descriptions.Item>
+                                <Descriptions.Item label="挂号类型">{item.isSpecialist?"专家门诊":"普通门诊"}</Descriptions.Item>
+                                <Descriptions.Item label="状态">{item.isFinished?"已完成":"未完成"}</Descriptions.Item>
+                                <Descriptions.Item label="挂号编号">{item.registrationId}</Descriptions.Item>
+                            </Descriptions>
                         </List.Item>
                     )}
-                />
-                :
-                <Empty description="暂无数据" style={{height: "200px", margin: "5% auto 5% auto"}}/>
-                }
+                    />
+                )
+            } else {
+                return (
+                    <Empty description="暂无数据" style={{height: "200px", margin: "5% auto 5% auto"}}/>
+                )
+            }
+        } else {
+            return (<Skeleton active />)
+        }
+    }
+
+    render() {
+        return (
+            <>
+                {this.renderList()}
             </>
         )
     }
