@@ -1,8 +1,9 @@
 import './Myheader.css';
-import { Button, Input, Divider} from 'antd';
+import { Button, Input, Divider, message} from 'antd';
 import logo from '../../pic/icon.png';
 import React from 'react';
 import {withRouter} from 'react-router-dom'
+import { logout } from '../../utils/utils';
 
 const { Search } = Input;
 
@@ -22,8 +23,19 @@ class Myheader extends React.Component {
     }
     logout = () => {
         console.log("logout");
-        localStorage.removeItem("userInfo");
-        setTimeout(()=>{this.setState({});}, 3000);
+        logout().then((res) => {
+            message.success(res.data.message);
+            localStorage.removeItem("userInfo");
+            this.setState({});
+        }, (res) => {
+            message.error(res.data.message);
+            localStorage.removeItem("userInfo");
+            this.setState({});
+        }).catch((err) => {
+            message.error(err);
+            localStorage.removeItem("userInfo");
+            this.setState({});
+        })
     }
 
     check = () => {

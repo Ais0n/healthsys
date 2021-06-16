@@ -281,3 +281,36 @@ export function createRegistration(data) {
         }
     })
 }
+
+export function logout() {
+    return new Promise(function (resolve, reject) {
+        let res = getUserInfo();
+        console.log(res);
+        if (res) {
+            instance.get('/logout', {
+                headers: { 'token': res.token }
+            }).then((value) => {
+                console.log(value);
+                if (value.data.status) {
+                    resolve(value);
+                } else {
+                    reject(value);
+                }
+            }).catch((err) => {
+                reject({
+                    data: {
+                        status: false,
+                        message: "网络错误"
+                    }
+                })
+            })
+        } else {
+            reject({
+                data: {
+                    status: false,
+                    message: "会话不存在或已过期，请重新登录！"
+                }
+            })
+        }
+    })
+}
