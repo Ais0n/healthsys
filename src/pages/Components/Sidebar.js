@@ -78,16 +78,24 @@ export default class Sidebar extends React.Component{
                         <Menu.Item key="11">修改密码</Menu.Item>
                         <Menu.Item key="12">用户信息</Menu.Item>
                     </SubMenu>
+                    {this.props.userInfo && this.props.userInfo.userData.userPermission == "user" ?
                     <SubMenu key="sub2" title="患者服务">
                         <Menu.Item key="21">挂号查询</Menu.Item>
                     </SubMenu>
+                        :<></>
+                    }
+                    {this.props.userInfo && this.props.userInfo.userData.userPermission == "doctor" ?
                     <SubMenu key="sub3" title="医师服务">
-                        <Menu.Item key="31">挂号查询</Menu.Item>
-                        <Menu.Item key="32">设置就诊时间</Menu.Item>
+                        <Menu.Item key="31">设置就诊时间</Menu.Item>
                     </SubMenu>
+                        :<></>
+                    }
+                    {this.props.userInfo && this.props.userInfo.userData.userPermission == "admin" ?
                     <SubMenu key="sub4" title="用户管理">
                         <Menu.Item key="41">审核医生</Menu.Item>
                     </SubMenu>
+                        :<></>
+                    }   
                 </Menu>
             </div>
         );

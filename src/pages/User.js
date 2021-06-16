@@ -71,7 +71,7 @@ class User extends React.Component {
                         <QueryRegistration/>
                         </Card>
                     )
-                case '32':
+                case '31':
                     return (
                         <Card title="设置就诊时间" bordered={true} className="card">
                         <SetRegistrationTime/>
@@ -118,7 +118,7 @@ class User extends React.Component {
                 <Myheader />
                 <Navbar />
                 <div className="mainContent">
-                    <Sidebar className="sidebar" caller={this}/>
+                    <Sidebar className="sidebar" caller={this} userInfo={this.check("userInfo")}/>
                         <div className="mainStaff">
                             {this.selectCard()}
                             <Myfooter/>

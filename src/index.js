@@ -4,10 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';  // 引入中文包
 
 ReactDOM.render(
   <React.StrictMode>
+    <ConfigProvider locale={zhCN}>
     <App />
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
