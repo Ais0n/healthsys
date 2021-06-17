@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.15.4",
     "axios": "^0.21.1",
+    "babel-polyfill": "^6.26.0",
     "localStorage": "^1.0.4",
     "lodash": "^4.17.21",
     "lodash.merge": "^4.6.2",
@@ -36,12 +37,17 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie >= 9"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie >= 9"
     ]
+  },
+  "devDependencies": {
+    "core-js": "^3.14.0"
   }
 }

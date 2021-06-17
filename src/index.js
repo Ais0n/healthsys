@@ -1,3 +1,7 @@
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import 'core-js'
+import 'babel-polyfill'; //解决ie11无法显示的问题
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
