@@ -11,7 +11,7 @@ import {withRouter} from 'react-router-dom'
 import { Empty, Button, Input, Descriptions, Radio, Card, Steps, message, Divider, Space, List, Avatar, Image, Modal, Result, Alert } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import Myfooter from './Components/Myfooter';
-import { createRegistration, queryDoctor } from '../utils/utils';
+import { createRegistration, getServerUrl, queryDoctor } from '../utils/utils';
 
 const { Step } = Steps;
 
@@ -215,7 +215,7 @@ class Guahao extends React.Component{
                 >
                   
                   <List.Item.Meta
-                        avatar={<Avatar size={100} src={`http://localhost:8000/images/${item.avatar}`}/>}
+                        avatar={<Avatar size={100} src={`${getServerUrl()}/images/${item.avatar}`}/>}
                         title={item.name}
                         description={`${item.age}岁 | ${item.hospitalName} | ${item.keshi} | 从医${item.workYears}年`}
                     />
@@ -252,7 +252,7 @@ class Guahao extends React.Component{
           <Card className="queryToolbarCard" title="确认挂号信息">
             <Space direction="vertical" style={{width: "90%", margin:"auto 5%"}} size="middle">
               <Descriptions title="医生信息" size="default" style={{"marginBottom": "50px"}}>
-              <Descriptions.Item label=""><Avatar size={100} src={`http://localhost:8000/images/${this.state.chosenDoctor.avatar}`}/></Descriptions.Item>
+              <Descriptions.Item label=""><Avatar size={100} src={`${getServerUrl()}/images/${this.state.chosenDoctor.avatar}`}/></Descriptions.Item>
                 <Descriptions.Item label="医生姓名">{this.state.chosenDoctor.name}</Descriptions.Item>
                 <Descriptions.Item label="年龄">{this.state.chosenDoctor.age+"岁"}</Descriptions.Item>
                 <Descriptions.Item label="科室">{this.state.chosenDoctor.keshi}</Descriptions.Item>
