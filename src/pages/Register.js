@@ -313,12 +313,6 @@ class Register extends React.Component {
                     message.error(res.data.message);   
                 }
             })
-            // this.props.history.push({
-            //     pathname:"/regsucceed",
-            //     query:{
-            //         values:values
-            //     }
-            // });
         }
     };
 

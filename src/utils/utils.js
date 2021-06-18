@@ -378,3 +378,12 @@ export function addTime(data) {
         }
     })
 }
+
+export function getHistoryRecord(data) {
+    console.log(data);
+    return new Promise(function (resolve, reject) {
+        let res = getUserInfo();
+        console.log(res);
+        console.log("getHistoryRecordFunction");
+    })
+}
