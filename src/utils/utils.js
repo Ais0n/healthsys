@@ -469,5 +469,6 @@ export function getHistoryInfo() {
                 }
             })
         }
+
     })
 }

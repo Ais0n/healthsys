@@ -28,6 +28,7 @@ class ClientChatWidget extends React.Component {
             user: this.props.user,
             user_list_: this.props.user_list_,
             msg_lists_: this.props.msg_lists_,
+
             sendMsg: "",
             window_size: {
                 width: 700,
@@ -50,6 +51,7 @@ class ClientChatWidget extends React.Component {
 
     componentDidMount() {
         let fromClientId = this.getFromClientId()
+
 
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
@@ -82,6 +84,7 @@ class ClientChatWidget extends React.Component {
             console.log("print evt");
             console.log(evt);
             console.log(evt.data);
+
         }
 
         this.ws.onclose = () => {
@@ -118,6 +121,7 @@ class ClientChatWidget extends React.Component {
         console.log(msg_lists_tmp[this.state.user.id]);
         
         (msg_lists_tmp[this.state.user.id] || (msg_lists_tmp[this.state.user.id] = [])).push({
+
             position: 'right',
             type: 'text',
             text: this.state.sendMsg,
@@ -189,6 +193,7 @@ class ClientChatWidget extends React.Component {
                         <MessageList
                             className='message-list'
                             dataSource={this.state.msg_lists_[this.state.user.id]}
+
                         />
                     </div>
                 </Row>
@@ -229,6 +234,7 @@ class ClientChatWidget extends React.Component {
                 <Row>
                     <Col style={{
                         width: this.state.window_size.width * 0.5 - 1,
+
                         textAlign: "center",
                         verticalAlign: "middle",
                         fontSize: 20,
@@ -255,6 +261,7 @@ class ClientChatView extends React.Component {
             },
             doctorInfoData: [],
             historyInfoData: [],
+
         }
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
@@ -390,6 +397,7 @@ class ClientChatView extends React.Component {
                         <ChatList className='chat-list' onClick={e => this.onChangeChatTgt(e)} dataSource={this.state.user_list_} />
                     </Col>
                     {this.state.user_list_.length == 0 ? <div>没有已经启动的问诊</div> : <ClientChatWidget user={this.state.nowChatTgt} user_list_={this.state.user_list_} msg_lists_={this.state.msg_lists_}/>}
+
                     <Col style={{width: this.state.window_size.width * 0.2 - 2,
                                 height: 600,
                                 display: 'inline-block',
@@ -407,6 +415,7 @@ class ClientChatView extends React.Component {
                             <li>{this.state.nowChatTgt == null ? "性别: 暂无信息" : this.state.nowChatTgt.info.xingbie == 1 ? "性别: 男" : "性别: 女"}</li>
                             <li>{this.state.nowChatTgt == null ? "职称: 暂无信息" : "职称: " + this.state.nowChatTgt.info.zhicheng}</li>
                         </ul>
+
                     </Col>
                 </Row>
             </div>
@@ -430,3 +439,4 @@ class Chatter extends React.Component {
     }
 }
 export default Chatter;
+

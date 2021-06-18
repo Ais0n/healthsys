@@ -10,8 +10,12 @@ import User from './pages/User'
 import ErrorPage from './pages/ErrorPage'
 import DoctorChat from './pages/Components/ChatDoctor'
 import ClientChat from './pages/Components/ChatClient'
+<<<<<<< HEAD
 import ChatRoomLoading from './pages/Components/Loading'
 import KeshiInfo from './pages/KeshiInfo';
+=======
+
+>>>>>>> failed chat-room
 
 function App() {
   return (
@@ -24,10 +28,15 @@ function App() {
         <Route path="/loginsucceed" component={LoginSucceed}/>
         <Route path="/regsucceed" component={RegisterSucceed}/>
         <Route path="/user" component={User}/>
+<<<<<<< HEAD
         <Route path="/keshiinfo" component={KeshiInfo}/>
         <Route path="/doctorchat" component={DoctorChat}/>
         <Route path="/clientchat" component={ClientChat}/>
         <Route path="/chatroomloading" component={ChatRoomLoading}/>
+=======
+        <Route path="/doctorchat" component={DoctorChat}/>
+        <Route path="/clientchat" component={ClientChat}/>
+>>>>>>> failed chat-room
         <Route path="/:location" component={ErrorPage}/>
       </Switch>
     </BrowserRouter>

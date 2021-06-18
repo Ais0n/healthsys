@@ -32,6 +32,7 @@ class DoctorChatWidget extends React.Component {
             //current_user_list_: this.props.current_user_list_,
             user_list_: this.props.user_list_,
             msg_lists_: this.props.msg_lists_,
+
             sendMsg: "",
             window_size: {
                 width: 700,
@@ -99,6 +100,7 @@ class DoctorChatWidget extends React.Component {
         console.log(this.state.user_list_);
         let fromClientId = this.getFromClientId()
 
+
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
 
@@ -133,6 +135,7 @@ class DoctorChatWidget extends React.Component {
             console.log(evt.data);
 
             //this.setState({msg_lists_ : msg_lists_tmp});
+
         }
 
         this.ws.onclose = () => {
@@ -142,6 +145,7 @@ class DoctorChatWidget extends React.Component {
         this.setState({ msg_lists_ : msg_lists_tmp})
         console.log("this.statemsg_lists_");
         console.log(this.state.msg_lists_);
+
 
     }
 
@@ -171,6 +175,7 @@ class DoctorChatWidget extends React.Component {
         console.log(msg_lists_tmp[this.state.user.id]);
         
         (msg_lists_tmp[this.state.user.id] || (msg_lists_tmp[this.state.user.id] = [])).push({
+
             position: 'right',
             type: 'text',
             text: this.state.sendMsg,
@@ -187,6 +192,7 @@ class DoctorChatWidget extends React.Component {
                 message: sendMsg
             }));
         this.setState({ sendMsg: "" , msg_lists_ : msg_lists_tmp});
+
     }
 
     onPicSend = (info) => {
@@ -246,6 +252,7 @@ class DoctorChatWidget extends React.Component {
                         <MessageList
                             className='message-list'
                             dataSource={this.state.msg_lists_[this.state.user.id]}
+
                         />
                     </div>
                 </Row>
@@ -293,7 +300,7 @@ class DoctorChatWidget extends React.Component {
                     }}>
                         <Button type="primary" onClick={this.onMsgSend}>发送</Button>
                     </Col>
-                    
+
                     <Col style={{
                         width: this.state.window_size.width * 0.25 - 1,
                         textAlign: "center",
@@ -307,6 +314,7 @@ class DoctorChatWidget extends React.Component {
                 </Row>
             </Col>
         </div>
+
         );
     }
 }
@@ -325,9 +333,11 @@ class DoctorChatView extends React.Component {
             },
             patientInfoData: [],
             historyInfoData: [],
+
         }
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
+
 
     showPatientInfo = async () => {
         
@@ -420,6 +430,7 @@ class DoctorChatView extends React.Component {
         this.loadHistoryInfo();
         
         //this.showPatientInfo();
+
     }
 
     onChangeChatTgt = (e) => {
@@ -439,6 +450,7 @@ class DoctorChatView extends React.Component {
     }
 
     render() {
+
         console.log('render');
         console.log(this.state.user_list_);
         console.log(this.state.msg_lists_);
@@ -480,9 +492,6 @@ class DoctorChatView extends React.Component {
     }
 }
 
-
-
-
 class Chatter extends React.Component {
     constructor(props) {
         super(props);
@@ -499,3 +508,4 @@ class Chatter extends React.Component {
     }
 }
 export default Chatter;
+
