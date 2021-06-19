@@ -389,6 +389,7 @@ export function getHistoryRecord(data) {
 }
 
 export function getDoctorInfo() {
+
     return new Promise(function (resolve, reject) {
         let res = getUserInfo();
         console.log(res);
@@ -469,6 +470,5 @@ export function getHistoryInfo() {
                 }
             })
         }
-
     })
 }

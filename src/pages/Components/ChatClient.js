@@ -12,6 +12,7 @@ import { getHistoryInfo, getDoctorInfo } from '../../utils/utils'
 import { withRouter } from 'react-router-dom';
 
 
+
 const size = {
     width: document.documentElement.clientWidth,
     hieght: document.documentElement.clientHeight
@@ -21,6 +22,7 @@ const { TextArea } = Input;
 //let msg_lists = {};//一个字典，键是聊天对象的名字，值是一个列表，这个列表中存储所有的消息
 
 
+
 class ClientChatWidget extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +30,6 @@ class ClientChatWidget extends React.Component {
             user: this.props.user,
             user_list_: this.props.user_list_,
             msg_lists_: this.props.msg_lists_,
-
             sendMsg: "",
             window_size: {
                 width: 700,
@@ -85,6 +86,7 @@ class ClientChatWidget extends React.Component {
             console.log(evt);
             console.log(evt.data);
 
+
         }
 
         this.ws.onclose = () => {
@@ -134,7 +136,7 @@ class ClientChatWidget extends React.Component {
 
         this.ws.send(JSON.stringify({
                 from: fromClientId,
-                to: toClientId,
+                to: fromClientId,
                 message: sendMsg
             }));
         this.setState({ sendMsg: "" , msg_lists_ : msg_lists_tmp});
@@ -194,6 +196,7 @@ class ClientChatWidget extends React.Component {
                             className='message-list'
                             dataSource={this.state.msg_lists_[this.state.user.id]}
 
+
                         />
                     </div>
                 </Row>
@@ -242,6 +245,7 @@ class ClientChatWidget extends React.Component {
                     }}>
                         <Button type="primary" onClick={this.onMsgSend}>发送</Button>
                     </Col>
+
                 </Row>
             </Col>
         );
@@ -285,6 +289,7 @@ class ClientChatView extends React.Component {
                     subtite: 'What are you doing?',
                     date: new Date(),
                     info: this.state.doctorInfoData[i]['userInfo'],
+
                 });
                 /*
                 let m_list = [];
@@ -339,6 +344,7 @@ class ClientChatView extends React.Component {
                         date: new Date()
                     })
                 }
+
             }
 
             this.setState({ msg_lists_ : msg_lists_tmp});
