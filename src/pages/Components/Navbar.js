@@ -9,6 +9,7 @@ export default function Navbar(){
             <NavLink to="/guahao" className="sub-navigation">在线问诊</NavLink>
             <NavLink to="/guahao" className="sub-navigation">送药上门</NavLink>
             <NavLink to="/user" className="sub-navigation">个人中心</NavLink>
+            <NavLink to="/clientchat" className="sub-navigation">线上咨询</NavLink>
         </div>
     )
 };

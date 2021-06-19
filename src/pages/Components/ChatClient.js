@@ -87,7 +87,7 @@ class ClientChatWidget extends React.Component {
         
         this.ws.onmessage = evt => {
             let msg = JSON.parse(evt.data);
-            if (msg.message == "发送成功"){
+            if (msg.to == msg.from){
                 console.log(msg.message);
             }
             else{
