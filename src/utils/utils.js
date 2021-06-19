@@ -379,11 +379,59 @@ export function addTime(data) {
     })
 }
 
-export function getHistoryRecord(data) {
-    console.log(data);
+export function getDoctorInfo() {
     return new Promise(function (resolve, reject) {
         let res = getUserInfo();
         console.log(res);
-        console.log("getHistoryRecordFunction");
+        if (res) {
+            instance.get('/chat/doctor', {
+                headers: { 'token': res.token }
+            }).then((value) => {
+                console.log(value);
+                if (value.data.status) {
+                    resolve(value);
+                } else {
+                    reject(value);
+                }
+            }).catch((err) => {
+                reject(err);
+            })
+        } else {
+            reject({
+                data: {
+                    status: false,
+                    message: "会话不存在或已过期，请重新登录！"
+                }
+            })
+        }
+    })
+}
+
+
+export function getHistoryInfo() {
+    return new Promise(function (resolve, reject) {
+        let res = getUserInfo();
+        console.log(res);
+        if (res) {
+            instance.get('/chat', {
+                headers: { 'token': res.token }
+            }).then((value) => {
+                console.log(value);
+                if (value.data.status) {
+                    resolve(value);
+                } else {
+                    reject(value);
+                }
+            }).catch((err) => {
+                reject(err);
+            })
+        } else {
+            reject({
+                data: {
+                    status: false,
+                    message: "会话不存在或已过期，请重新登录！"
+                }
+            })
+        }
     })
 }
