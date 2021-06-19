@@ -62,7 +62,7 @@ class ClientChatWidget extends React.Component {
             date: new Date(),
             // unread: Math.floor(Math.random() * 10),
         });
-        msg_lists_tmp[user_list_tmp[user_list_tmp.length-1].title] = [];
+        msg_lists_tmp[user_list_tmp[user_list_tmp.length-1].id] = [];
         
         this.setState({msg_lists_ : msg_lists_tmp, user_list_ : user_list_tmp, msg_lists_ : msg_lists_tmp});
     }
@@ -87,12 +87,17 @@ class ClientChatWidget extends React.Component {
         
         this.ws.onmessage = evt => {
             let msg = JSON.parse(evt.data);
-            (msg_lists_tmp[this.state.user.title] || (msg_lists_tmp[this.state.user.title] = [])).push({
-                position: 'left',
-                type: 'text',
-                text: msg.message,
-                date: new Date()
-            });
+            if (msg.message == "发送成功"){
+                console.log(msg.message);
+            }
+            else{
+                (msg_lists_tmp[this.state.user.id] || (msg_lists_tmp[this.state.user.id] = [])).push({
+                    position: 'left',
+                    type: 'text',
+                    text: msg.message,
+                    date: new Date()
+                });
+            }
             console.log("print evt");
             console.log(evt);
             console.log(evt.data);
@@ -124,14 +129,14 @@ class ClientChatWidget extends React.Component {
     }
 
     getToClientId = () => {
-        return this.state.nowChatTgt;
+        return this.state.user.id;
     }
 
     onMsgSend() {
         let msg_lists_tmp = this.state.msg_lists_
-        console.log(msg_lists_tmp[this.state.user.title]);
+        console.log(msg_lists_tmp[this.state.user.id]);
         
-        (msg_lists_tmp[this.state.user.title] || (msg_lists_tmp[this.state.user.title] = [])).push({
+        (msg_lists_tmp[this.state.user.id] || (msg_lists_tmp[this.state.user.id] = [])).push({
             position: 'right',
             type: 'text',
             text: this.state.sendMsg,
@@ -144,7 +149,7 @@ class ClientChatWidget extends React.Component {
 
         this.ws.send(JSON.stringify({
                 from: fromClientId,
-                to: fromClientId,
+                to: toClientId,
                 message: sendMsg
             }));
         this.setState({ sendMsg: "" , msg_lists_ : msg_lists_tmp});
@@ -167,7 +172,7 @@ class ClientChatWidget extends React.Component {
 
     render() {
         console.log('render2')
-        console.log(this.state.user.title);
+        console.log(this.state.user.id);
         console.log(this.state.msg_lists_);
         return (
             <Col style={{
@@ -202,7 +207,7 @@ class ClientChatWidget extends React.Component {
                     >
                         <MessageList
                             className='message-list'
-                            dataSource={this.state.msg_lists_[this.state.user.title]}
+                            dataSource={this.state.msg_lists_[this.state.user.id]}
                         />
                     </div>
                 </Row>
@@ -295,10 +300,12 @@ class ClientChatView extends React.Component {
             for (let i = 0; i < this.state.doctorInfoData.length; ++i) {
                 user_list_tmp.push({
                     avator: '../../../public/I_am_doctor.png',
-                    alt: 'A',
-                    title: this.state.doctorInfoData[i]['userId'],
-                    subtite: 'subtitle',
+                    alt: this.state.doctorInfoData[i]['userName'],
+                    id: this.state.doctorInfoData[i]['userId'],
+                    title: this.state.doctorInfoData[i]['userName'],
+                    subtite: 'What are you doing?',
                     date: new Date(),
+                    info: this.state.doctorInfoData[i]['userInfo'],
                 });
                 /*
                 let m_list = [];
@@ -410,7 +417,15 @@ class ClientChatView extends React.Component {
                                 verticalAlign: "middle",
                                 backgroundColor: "\t#F9F9FF"}}>
                         <h1 style={{ textAlign: 'center' }}>医生信息</h1>
-                        {this.state.nowChatTgt == null ? "无人" : this.state.nowChatTgt.title}
+                        <ul align="left">
+                            <li>{this.state.nowChatTgt == null ? "姓名: 暂无信息" : "姓名: " + this.state.nowChatTgt.title}</li>
+                            <li>{this.state.nowChatTgt == null ? "所属医院: 暂无信息" : "所属医院: " + this.state.nowChatTgt.info.hospitalName}</li>
+                            <li>{this.state.nowChatTgt == null ? "科室: 暂无信息" : "科室:" + this.state.nowChatTgt.info.keshi}</li>
+                            <li>{this.state.nowChatTgt == null ? "工作经验: 暂无信息" : "工作经验: " + this.state.nowChatTgt.info.workYears + " 年"}</li>
+                            <li>{this.state.nowChatTgt == null ? "性别: 暂无信息" : this.state.nowChatTgt.info.xingbie == 1 ? "性别: 男" : "性别: 女"}</li>
+                            <li>{this.state.nowChatTgt == null ? "职称: 暂无信息" : "职称: " + this.state.nowChatTgt.info.zhicheng}</li>
+                        </ul>
+                        
                     </Col>
                 </Row>
             </div>
