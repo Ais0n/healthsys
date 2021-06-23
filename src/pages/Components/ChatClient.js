@@ -50,23 +50,6 @@ class ClientChatWidget extends React.Component {
         console.log(this.state.msg_lists_);
     }
 
-    onPatientNext = () => {
-        message.success("switch patient.");
-        let user_list_tmp = this.state.user_list_;
-        let msg_lists_tmp = this.state.msg_lists_;
-        user_list_tmp.push({
-            avatar: '../../../public/favicon.ico',
-            alt: 'Reactjs',
-            title: 'new user',
-            subtitle: '',
-            date: new Date(),
-            // unread: Math.floor(Math.random() * 10),
-        });
-        msg_lists_tmp[user_list_tmp[user_list_tmp.length-1].id] = [];
-        
-        this.setState({msg_lists_ : msg_lists_tmp, user_list_ : user_list_tmp, msg_lists_ : msg_lists_tmp});
-    }
-
     componentDidMount() {
         let fromClientId = this.getFromClientId()
 
@@ -145,7 +128,7 @@ class ClientChatWidget extends React.Component {
 
         let fromClientId = this.getFromClientId();
         let toClientId = this.getToClientId();
-        let sendMsg = this.state.sendMsg
+        let sendMsg = this.state.sendMsg;
 
         this.ws.send(JSON.stringify({
                 from: fromClientId,
@@ -247,22 +230,13 @@ class ClientChatWidget extends React.Component {
                 </Row>
                 <Row>
                     <Col style={{
-                        width: this.state.window_size.width * 0.25 - 1,
+                        width: this.state.window_size.width * 0.5 - 1,
                         textAlign: "center",
                         verticalAlign: "middle",
                         fontSize: 20,
                         backgroundColor: "\t#F9F9FF"
                     }}>
                         <Button type="primary" onClick={this.onMsgSend}>发送</Button>
-                    </Col>
-                    <Col style={{
-                        width: this.state.window_size.width * 0.25 - 1,
-                        textAlign: "center",
-                        verticalAlign: "middle",
-                        fontSize: 20,
-                        backgroundColor: "\t#F9F9FF"
-                    }}>
-                        <Button type="primary" onClick={this.onPatientNext}>下一位</Button>
                     </Col>
                 </Row>
             </Col>
@@ -300,7 +274,7 @@ class ClientChatView extends React.Component {
             for (let i = 0; i < this.state.doctorInfoData.length; ++i) {
                 user_list_tmp.push({
                     avator: '../../../public/I_am_doctor.png',
-                    alt: this.state.doctorInfoData[i]['userName'],
+                    alt: '医生',
                     id: this.state.doctorInfoData[i]['userId'],
                     title: this.state.doctorInfoData[i]['userName'],
                     subtite: 'What are you doing?',
@@ -343,13 +317,23 @@ class ClientChatView extends React.Component {
 
             let msg_lists_tmp = {};
             
-            for (let i = 0; i < this.state.historyInfoData.length; ++i) {
-                (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] || (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] = [])).push({
-                    position: 'left',
-                    type: 'text',
-                    text: this.state.historyInfoData[i]['content'],
-                    date: new Date()
-                })
+            for (let i = this.state.historyInfoData.length-1; i >= 0; --i) {
+                if (this.state.historyInfoData[i]['in_out'] == 'in'){
+                    (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] || (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] = [])).push({
+                        position: 'left',
+                        type: 'text',
+                        text: this.state.historyInfoData[i]['content'],
+                        date: new Date()
+                    })
+                }
+                else if (this.state.historyInfoData[i]['in_out'] == 'out'){
+                    (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] || (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] = [])).push({
+                        position: 'right',
+                        type: 'text',
+                        text: this.state.historyInfoData[i]['content'],
+                        date: new Date()
+                    })
+                }
             }
 
             this.setState({ msg_lists_ : msg_lists_tmp});
@@ -425,7 +409,6 @@ class ClientChatView extends React.Component {
                             <li>{this.state.nowChatTgt == null ? "性别: 暂无信息" : this.state.nowChatTgt.info.xingbie == 1 ? "性别: 男" : "性别: 女"}</li>
                             <li>{this.state.nowChatTgt == null ? "职称: 暂无信息" : "职称: " + this.state.nowChatTgt.info.zhicheng}</li>
                         </ul>
-                        
                     </Col>
                 </Row>
             </div>

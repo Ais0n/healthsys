@@ -435,7 +435,6 @@ export function getPatientInfo() {
     })
 }
 
-
 export function getHistoryInfo() {
     return new Promise(function (resolve, reject) {
         let res = getUserInfo();
