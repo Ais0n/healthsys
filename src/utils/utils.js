@@ -53,7 +53,7 @@ export function userRegister(data) {
     })
 }
 
-function getUserInfo() {
+export function getUserInfo() {
     let storage = JSON.parse(localStorage.getItem("userInfo"));
     let time = new Date().getTime();
     let result = null;

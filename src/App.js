@@ -10,7 +10,7 @@ import User from './pages/User'
 import ErrorPage from './pages/ErrorPage'
 import DoctorChat from './pages/Components/ChatDoctor'
 import ClientChat from './pages/Components/ChatClient'
-
+import ChatRoomLoading from './pages/Components/Loading'
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
         <Route path="/user" component={User}/>
         <Route path="/doctorchat" component={DoctorChat}/>
         <Route path="/clientchat" component={ClientChat}/>
+        <Route path="/chatroomloading" component={ChatRoomLoading}/>
         <Route path="/:location" component={ErrorPage}/>
       </Switch>
     </BrowserRouter>
