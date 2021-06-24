@@ -1,5 +1,5 @@
 const mode = "dev";  //开发模式用"dev", 生产模式改成"prod"
-const serverAddr = ( mode == "dev") ? "http://127.0.0.1:8000" : "http://121.41.171.65:8000/";
+const serverAddr = ( mode == "dev") ? "http://127.0.0.1:8000" : "http://121.41.171.65:8000";
 const axios = require('axios');
 var instance = axios.create({
     baseURL: serverAddr,
