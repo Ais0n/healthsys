@@ -401,6 +401,7 @@ class DoctorChatView extends React.Component {
             current_user_list_tmp.push(user_list_tmp[0]);
             console.log(current_user_list_tmp);
             //current_user_list_ = current_user_list_tmp;
+            current_user_list_ = [];
             current_user_list_.push(user_list_tmp[0]);
             this.setState({ current_user_list_ : current_user_list_tmp});
             
