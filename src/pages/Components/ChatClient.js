@@ -271,7 +271,7 @@ class ClientChatView extends React.Component {
             let msg_lists_tmp = {}
             for (let i = 0; i < this.state.doctorInfoData.length; ++i) {
                 user_list_tmp.push({
-                    avator: '../../../public/I_am_doctor.png',
+                    avator: '../../pic/I_am_doctor.png',
                     alt: '医生',
                     id: this.state.doctorInfoData[i]['userId'],
                     title: this.state.doctorInfoData[i]['userName'],
