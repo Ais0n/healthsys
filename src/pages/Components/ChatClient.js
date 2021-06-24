@@ -276,16 +276,15 @@ class ClientChatView extends React.Component {
             console.log("doctorInfo");
             console.log(doctorInfo);
             message.success(doctorInfo.data.message);
-            this.setState({doctorInfoData: doctorInfo.data.doctorInfo});
 
             let user_list_tmp = []
             let msg_lists_tmp = {}
-            for (let i = 0; i < this.state.doctorInfoData.length; ++i) {
+            for (let i = 0; i < doctorInfo.data.doctorInfo.length; ++i) {
                 user_list_tmp.push({
                     avator: '../../pic/I_am_doctor.png',
                     alt: '医生',
-                    id: this.state.doctorInfoData[i]['userId'],
-                    title: this.state.doctorInfoData[i]['userName'],
+                    id: doctorInfo.data.doctorInfo[i]['userId'],
+                    title: doctorInfo.data.doctorInfo[i]['userName'],
                     subtite: 'What are you doing?',
                     date: new Date(),
                     info: this.state.doctorInfoData[i]['userInfo'],
@@ -307,8 +306,7 @@ class ClientChatView extends React.Component {
 
             this.setState({ nowChatTgt : user_list_tmp[0] });
             this.setState({ user_list_ : user_list_tmp });
-            console.log('just check')
-            console.log(this.state.user_list_tmp);
+            this.setState({ doctorInfoData: doctorInfo.data.doctorInfo });
         }, (doctorInfo) => {
             if (doctorInfo.isAxiiosError){
                 message.error("网络异常");
@@ -323,24 +321,23 @@ class ClientChatView extends React.Component {
         getHistoryInfo().then(
         (historyInfo)=>{
             message.success(historyInfo.data.message);
-            this.setState({historyInfoData : historyInfo.data.messageData});
-
+            
             let msg_lists_tmp = {};
             
-            for (let i = this.state.historyInfoData.length-1; i >= 0; --i) {
-                if (this.state.historyInfoData[i]['in_out'] == 'in'){
-                    (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] || (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] = [])).push({
+            for (let i = historyInfo.data.messageData.length-1; i >= 0; --i) {
+                if (historyInfo.data.messageData[i]['in_out'] == 'in'){
+                    (msg_lists_tmp[historyInfo.data.messageData[i]['opposite']] || (msg_lists_tmp[historyInfo.data.messageData[i]['opposite']] = [])).push({
                         position: 'left',
                         type: 'text',
-                        text: this.state.historyInfoData[i]['content'],
+                        text: historyInfo.data.messageData[i]['content'],
                         date: new Date()
                     })
                 }
-                else if (this.state.historyInfoData[i]['in_out'] == 'out'){
-                    (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] || (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] = [])).push({
+                else if (historyInfo.data.messageData[i]['in_out'] == 'out'){
+                    (msg_lists_tmp[historyInfo.data.messageData[i]['opposite']] || (msg_lists_tmp[historyInfo.data.messageData[i]['opposite']] = [])).push({
                         position: 'right',
                         type: 'text',
-                        text: this.state.historyInfoData[i]['content'],
+                        text: historyInfo.data.messageData[i]['content'],
                         date: new Date()
                     })
                 }
@@ -348,6 +345,7 @@ class ClientChatView extends React.Component {
             }
 
             this.setState({ msg_lists_ : msg_lists_tmp});
+            this.setState({ historyInfoData: historyInfo.data.messageData });
             //}
             /*
             this.setState(historyInfo: historyInfo.data)

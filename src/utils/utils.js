@@ -422,6 +422,34 @@ export function getPatientInfo() {
         let res = getUserInfo();
         console.log(res);
         if (res) {
+            instance.post('/registration/patient', {},{
+                headers: { 'token': res.token }
+            }).then((value) => {
+                console.log(value);
+                if (value.data.status) {
+                    resolve(value);
+                } else {
+                    reject(value);
+                }
+            }).catch((err) => {
+                reject(err);
+            })
+        } else {
+            reject({
+                data: {
+                    status: false,
+                    message: "会话不存在或已过期，请重新登录！"
+                }
+            })
+        }
+    })
+}
+
+export function getPatientInfoTmp() {
+    return new Promise(function (resolve, reject) {
+        let res = getUserInfo();
+        console.log(res);
+        if (res) {
             instance.get('/chat/user', {
                 headers: { 'token': res.token }
             }).then((value) => {
@@ -444,6 +472,7 @@ export function getPatientInfo() {
         }
     })
 }
+
 
 export function getHistoryInfo() {
     return new Promise(function (resolve, reject) {
