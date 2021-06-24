@@ -55,7 +55,7 @@ class Mainpage extends React.Component {
             </div>
 
             <div className="sub-picture">
-              <a href="#">
+              <a href="/guahao">
               <div className="doctor-patient">
                   <img className="doctor-patient-pic" src={patient_pic} alt=""></img>
                   <div className="doctor-patient-text-1">我是患者</div>
@@ -63,7 +63,7 @@ class Mainpage extends React.Component {
               </div>
               </a>
 
-              <a href="#">
+              <a href="/chatroomloading">
               <div className="doctor-patient">
                   <img className="doctor-patient-pic" src={doctor_pic} alt=""></img>
                   <div className="doctor-patient-text-1">我是医生</div>
