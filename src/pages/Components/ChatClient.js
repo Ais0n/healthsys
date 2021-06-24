@@ -12,7 +12,6 @@ import { getHistoryInfo, getDoctorInfo } from '../../utils/utils'
 import { withRouter } from 'react-router-dom';
 
 
-
 const size = {
     width: document.documentElement.clientWidth,
     hieght: document.documentElement.clientHeight
@@ -20,7 +19,6 @@ const size = {
 const { TextArea } = Input;
 //let user_list = [];//一个列表，存储所有的聊天对象
 //let msg_lists = {};//一个字典，键是聊天对象的名字，值是一个列表，这个列表中存储所有的消息
-
 
 
 class ClientChatWidget extends React.Component {

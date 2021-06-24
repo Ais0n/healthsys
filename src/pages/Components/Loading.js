@@ -20,21 +20,36 @@ class ChatRoomLoading extends React.Component {
 
     componentDidMount() {
         let userInfo = getUserInfo();
-        let userPermission = userInfo.userData.userPermission;
-        console.log(userPermission);
+        if (userInfo){
+            let userPermission = userInfo.userData.userPermission;
+            console.log(userPermission);
 
-        if ( userPermission == 'doctor') {
-            this.props.history.push({
-                pathname:"/doctorchat",
-                userData: userInfo.userData,
-            });
+            if ( userPermission == 'doctor') {
+                this.props.history.push({
+                    pathname:"/doctorchat",
+                    userData: userInfo.userData,
+                });
+            }
+            else if ( userPermission == 'user') {
+                this.props.history.push({
+                    pathname:"/clientchat",
+                    userData: userInfo.userData,
+                });
+            }
+            else {
+                this.props.history.push({
+                    pathname:"/",
+                    userData: userInfo.userData,
+                });
+            }
         }
-        else if ( userPermission == 'user') {
+        else {
             this.props.history.push({
-                pathname:"/clientchat",
-                userData: userInfo.userData,
+                    pathname:"/",
             });
+            message.error("您暂未登陆，无法进入聊天室");
         }
+        
     }
 
 

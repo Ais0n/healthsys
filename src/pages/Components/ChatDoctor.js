@@ -17,6 +17,8 @@ const size = {
     hieght: document.documentElement.clientHeight
 }
 const { TextArea } = Input;
+
+let current_user_list_ = []
 //let user_list = [];//一个列表，存储所有的聊天对象
 //let msg_lists = {};//一个字典，键是聊天对象的名字，值是一个列表，这个列表中存储所有的消息
 
@@ -27,6 +29,7 @@ class DoctorChatWidget extends React.Component {
         this.state = {
             user: this.props.user,
             current_user_num: 0,
+            //current_user_list_: this.props.current_user_list_,
             user_list_: this.props.user_list_,
             msg_lists_: this.props.msg_lists_,
             sendMsg: "",
@@ -37,6 +40,7 @@ class DoctorChatWidget extends React.Component {
             file: null,
             imagePreviewUrl: "",
         }
+        this.setState({ current_user_list_ : this.props.current_user_list_});
         this.onMsgSend = this.onMsgSend.bind(this);
         this.onPatientNext = this.onPatientNext.bind(this);
         this.messagesEnd = createRef();
@@ -48,20 +52,51 @@ class DoctorChatWidget extends React.Component {
         console.log('compare');
         console.log(this.props.msg_lists_);
         console.log(this.state.msg_lists_);
+        console.log(this.state.current_user_list_);
     }
 
     onPatientNext = () => {
         message.success("开始与下一位患者咨询");
+        //current_user_list_.push(this.props.user_list_[current_user_num_]);
         let user_list_tmp = this.state.user_list_;
         let msg_lists_tmp = this.state.msg_lists_;
         let current_user_num_ = this.state.current_user_num + 1;
+        if (current_user_num_ >= this.state.user_list_.length){
+            current_user_num_ = current_user_num_ - 1;
+        }
+        else{
+            current_user_list_.push(this.props.user_list_[current_user_num_]);
+        }
+
         this.setState({current_user_num : current_user_num_})
         this.setState({user : this.props.user_list_[current_user_num_]});
-        this.setState({msg_lists_ : msg_lists_tmp, user_list_ : user_list_tmp, msg_lists_ : msg_lists_tmp});
+
+        let fromClientId = this.getFromClientId();
+        let toClientId = this.getToClientId();
+        
+        (msg_lists_tmp[this.props.user_list_[current_user_num_].id] || (msg_lists_tmp[this.props.user_list_[current_user_num_].id] = [])).push({
+            position: 'right',
+            type: 'text',
+            text: "您好，医生已完成叫号，线上咨询开始",
+            date: new Date()
+        });
+        this.ws.send(JSON.stringify({
+                from: fromClientId,
+                to: toClientId,
+                message: "您好，医生已完成叫号，线上咨询开始"
+            }));
+        
+        
+        this.setState({msg_lists_ : msg_lists_tmp});
+        this.setState({user_list_ : user_list_tmp});
     }
 
     componentDidMount() {
         console.log('componentDidMount');
+        console.log(this.props.msg_lists_);
+        console.log(this.state.msg_lists_);
+        console.log(this.props.user_list_);
+        console.log(this.state.user_list_);
         let fromClientId = this.getFromClientId()
 
         this.updateWindowDimensions();
@@ -103,8 +138,10 @@ class DoctorChatWidget extends React.Component {
         this.ws.onclose = () => {
             console.log('disconnected')
         }
-
+        
         this.setState({ msg_lists_ : msg_lists_tmp})
+        console.log("this.statemsg_lists_");
+        console.log(this.state.msg_lists_);
 
     }
 
@@ -170,8 +207,12 @@ class DoctorChatWidget extends React.Component {
     render() {
         console.log('render2');
         console.log(this.state.user.id);
+        console.log(this.props.msg_lists_);
         console.log(this.state.msg_lists_);
+        console.log(this.props.current_user_list_);
+        console.log(this.state.current_user_list_);
         return (
+        <div>
             <Col style={{
                 width: this.state.window_size.width * 0.5,
                 height: 600,
@@ -252,6 +293,7 @@ class DoctorChatWidget extends React.Component {
                     }}>
                         <Button type="primary" onClick={this.onMsgSend}>发送</Button>
                     </Col>
+                    
                     <Col style={{
                         width: this.state.window_size.width * 0.25 - 1,
                         textAlign: "center",
@@ -261,11 +303,14 @@ class DoctorChatWidget extends React.Component {
                     }}>
                         <Button type="primary" onClick={this.onPatientNext}>叫号</Button>
                     </Col>
+                    
                 </Row>
             </Col>
+        </div>
         );
     }
 }
+
 
 class DoctorChatView extends React.Component {
     constructor(props) {
@@ -285,38 +330,7 @@ class DoctorChatView extends React.Component {
     }
 
     showPatientInfo = async () => {
-        getPatientInfo().then(
-        (patientInfo)=>{
-            console.log("patientInfo");
-            console.log(patientInfo);
-            message.success(patientInfo.data.message);
-            this.setState({patientInfoData: patientInfo.data.userInfo});
-            console.log(this.state.patientInfoData);
-
-            let user_list_tmp = []
-            let msg_lists_tmp = {}
-            
-            for (let i = 0; i < this.state.patientInfoData.length; ++i) {
-                user_list_tmp.push({
-                    avator: '../../../public/I_am_doctor.png',
-                    alt: '用户',
-                    id: this.state.patientInfoData[i]['userId'],
-                    title: this.state.patientInfoData[i]['userName'],
-                    subtite: 'What are you doing?',
-                    date: new Date(),
-                    info: this.state.patientInfoData[i]['userInfo'],
-                });
-            }
-            
-            this.setState({ nowChatTgt : user_list_tmp[0] });
-            this.setState({ user_list_ : user_list_tmp });
-        }, (patientInfo) => {
-            if (patientInfo.isAxiiosError){
-                message.error("网络异常");
-            } else {
-                message.error(patientInfo.data.message);
-            }
-        })
+        
     };
 
 
@@ -347,19 +361,7 @@ class DoctorChatView extends React.Component {
                     })
                 }
             }
-            console.log('msg_lists_');
-            console.log(msg_lists_tmp);
             this.setState({ msg_lists_ : msg_lists_tmp});
-            //}
-            /*
-            this.setState(historyInfo: historyInfo.data)
-            console.log('just test history info');
-            console.log(historyInfo.data);
-            for (let i = 0; i < this.state.doctorInfo.length; ++i) {
-                let m_list = [];
-                for (let i = 0; i < this.state.historyInfo.length)
-            }
-            */
         },
         (historyInfo) => {
             if (historyInfo.isAxiiosError){
@@ -368,13 +370,55 @@ class DoctorChatView extends React.Component {
                 message.error(historyInfo.data.message);
             }
         })
+
+        getPatientInfo().then(
+        (patientInfo)=>{
+            console.log("patientInfo");
+            console.log(patientInfo);
+            message.success(patientInfo.data.message);
+            this.setState({patientInfoData: patientInfo.data.userInfo});
+            console.log(this.state.patientInfoData);
+
+            let user_list_tmp = []
+            let msg_lists_tmp = {}
+            
+            for (let i = 0; i < this.state.patientInfoData.length; ++i) {
+                user_list_tmp.push({
+                    avator: '../../../public/I_am_doctor.png',
+                    alt: '用户',
+                    id: this.state.patientInfoData[i]['userId'],
+                    title: this.state.patientInfoData[i]['userName'],
+                    subtite: 'What are you doing?',
+                    date: new Date(),
+                    info: this.state.patientInfoData[i]['userInfo'],
+                    unread: 1,
+                });
+            }
+            
+            this.setState({ nowChatTgt : user_list_tmp[0] });
+            this.setState({ user_list_ : user_list_tmp });
+            let current_user_list_tmp = [];
+            current_user_list_tmp.push(user_list_tmp[0]);
+            console.log(current_user_list_tmp);
+            //current_user_list_ = current_user_list_tmp;
+            current_user_list_.push(user_list_tmp[0]);
+            this.setState({ current_user_list_ : current_user_list_tmp});
+            
+        }, (patientInfo) => {
+            if (patientInfo.isAxiiosError){
+                message.error("网络异常");
+            } else {
+                message.error(patientInfo.data.message);
+            }
+        })
     }
 
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
-        this.showPatientInfo();
         this.loadHistoryInfo();
+        
+        //this.showPatientInfo();
     }
 
     onChangeChatTgt = (e) => {
@@ -394,8 +438,10 @@ class DoctorChatView extends React.Component {
     }
 
     render() {
+        console.log('render');
         console.log(this.state.user_list_);
         console.log(this.state.msg_lists_);
+        console.log(this.state.current_user_list_);
         return (
             <div>
                 <Row align='middle' justify='center'>
@@ -404,9 +450,15 @@ class DoctorChatView extends React.Component {
                                 display: 'inline-block',
                                 borderRight: "2px solid #C4C4FF",
                                 overflow: "auto"}}>
-                        <ChatList className='chat-list' onClick={e => this.onChangeChatTgt(e)} dataSource={this.state.user_list_} />
+                        <ChatList className='chat-list' onClick={e => this.onChangeChatTgt(e)} dataSource={current_user_list_} />
                     </Col>
-                    {this.state.user_list_.length == 0 ? <div>没有已经启动的问诊</div> : <DoctorChatWidget user={this.state.nowChatTgt} user_list_={this.state.user_list_} msg_lists_={this.state.msg_lists_}/>}
+                    {this.state.user_list_.length == 0 ? <div>没有已经启动的问诊</div> : <DoctorChatWidget 
+                                                                                        user={this.state.nowChatTgt} 
+                                                                                        user_list_={this.state.user_list_} 
+                                                                                        msg_lists_={this.state.msg_lists_} 
+                                                                                        current_user_list_={this.state.current_user_list_}
+                                                                                        />
+                    }
                     <Col style={{width: this.state.window_size.width * 0.2 - 2,
                                 height: 600,
                                 display: 'inline-block',
@@ -426,6 +478,9 @@ class DoctorChatView extends React.Component {
         );
     }
 }
+
+
+
 
 class Chatter extends React.Component {
     constructor(props) {
