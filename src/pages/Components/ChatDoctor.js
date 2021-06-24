@@ -338,28 +338,30 @@ class DoctorChatView extends React.Component {
         getHistoryInfo().then(
         (historyInfo)=>{
             message.success(historyInfo.data.message);
+            this.setState({historyInfoData : historyInfo.data.messageData});
+            console.log('historyInfo');
+            console.log(historyInfo.data.messageData);
 
             let msg_lists_tmp = {};
-            for (let i = historyInfo.data.messageData[i].length-1; i >= 0; --i) {
-                if (historyInfo.data.messageData[i]['in_out'] == 'in'){
-                    (msg_lists_tmp[historyInfo.data.messageData[i]['opposite']] || (msg_lists_tmp[historyInfo.data.messageData[i]['opposite']] = [])).push({
+            for (let i = this.state.historyInfoData.length-1; i >= 0; --i) {
+                if (this.state.historyInfoData[i]['in_out'] == 'in'){
+                    (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] || (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] = [])).push({
                         position: 'left',
                         type: 'text',
-                        text: historyInfo.data.messageData[i]['content'],
+                        text: this.state.historyInfoData[i]['content'],
                         date: new Date()
                     })
                 }
-                else if (historyInfo.data.messageData[i]['in_out'] == 'out'){
-                    (msg_lists_tmp[historyInfo.data.messageData[i]['opposite']] || (msg_lists_tmp[historyInfo.data.messageData[i]['opposite']] = [])).push({
+                else if (this.state.historyInfoData[i]['in_out'] == 'out'){
+                    (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] || (msg_lists_tmp[this.state.historyInfoData[i]['opposite']] = [])).push({
                         position: 'right',
                         type: 'text',
-                        text: historyInfo.data.messageData[i]['content'],
+                        text: this.state.historyInfoData[i]['content'],
                         date: new Date()
                     })
                 }
             }
-            this.setState({ msg_lists_ : msg_lists_tmp });
-            this.setState({ historyInfoData: historyInfo.data.messageData });
+            this.setState({ msg_lists_ : msg_lists_tmp});
         },
         (historyInfo) => {
             if (historyInfo.isAxiiosError){
@@ -374,34 +376,34 @@ class DoctorChatView extends React.Component {
             console.log("patientInfo");
             console.log(patientInfo);
             message.success(patientInfo.data.message);
+            this.setState({patientInfoData: patientInfo.data.userInfo});
             console.log(this.state.patientInfoData);
 
             let user_list_tmp = []
             let msg_lists_tmp = {}
             
-            for (let i = 0; i < patientInfo.data.userInfo.length; ++i) {
+            for (let i = 0; i < this.state.patientInfoData.length; ++i) {
                 user_list_tmp.push({
                     avator: '../../../public/I_am_doctor.png',
                     alt: '用户',
-                    id: patientInfo.data.userInfo.patientInfoData[i]['userId'],
-                    title: patientInfo.data.userInfo.patientInfoData[i]['userName'],
+                    id: this.state.patientInfoData[i]['userId'],
+                    title: this.state.patientInfoData[i]['userName'],
                     subtite: 'What are you doing?',
                     date: new Date(),
-                    info: patientInfo.data.userInfo.patientInfoData[i]['userInfo'],
+                    info: this.state.patientInfoData[i]['userInfo'],
                     unread: 1,
                 });
             }
-
+            
+            this.setState({ nowChatTgt : user_list_tmp[0] });
+            this.setState({ user_list_ : user_list_tmp });
             let current_user_list_tmp = [];
             current_user_list_tmp.push(user_list_tmp[0]);
             console.log(current_user_list_tmp);
-
+            //current_user_list_ = current_user_list_tmp;
             current_user_list_ = [];
             current_user_list_.push(user_list_tmp[0]);
             this.setState({ current_user_list_ : current_user_list_tmp});
-            this.setState({ patientInfoData: patientInfo.data.userInfo });
-            this.setState({ nowChatTgt: user_list_tmp[0] });
-            this.setState({ user_list_: user_list_tmp });
             
         }, (patientInfo) => {
             if (patientInfo.isAxiiosError){
