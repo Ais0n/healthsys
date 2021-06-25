@@ -1,5 +1,7 @@
 import React from 'react'
 import shuffle_pic_1 from '../pic/shuffle_pic_1.png' 
+import shuffle_pic_2 from '../pic/shuffle_pic_2.jpg'
+import shuffle_pic_3 from '../pic/shuffle_pic_3.jpg'
 import patient_pic from '../pic/I_am_patient.png' 
 import doctor_pic from '../pic/I_am_doctor.png' 
 import depart_pic_A from '../pic/depart_A.png' 
@@ -43,13 +45,10 @@ class Mainpage extends React.Component {
                     <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
                   </div>
                   <div>
-                    <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
+                    <img className="shuffle-pic" src={shuffle_pic_2} alt=""></img>
                   </div>
                   <div>
-                    <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
-                  </div>
-                  <div>
-                    <img className="shuffle-pic" src={shuffle_pic_1} alt=""></img>
+                    <img className="shuffle-pic" src={shuffle_pic_3} alt=""></img>
                   </div>
                 </Carousel>
             </div>
