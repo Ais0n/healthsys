@@ -10,6 +10,7 @@ export default function Navbar(){
             <NavLink to="/chatroomloading" className="sub-navigation">在线问诊</NavLink>
             <NavLink to="/guahao" className="sub-navigation">送药上门</NavLink>
             <NavLink to="/user" className="sub-navigation">个人中心</NavLink>
+            <NavLink to="/keshiinfo" className="sub-navigation">科室介绍</NavLink>
         </div>
     )
 };
