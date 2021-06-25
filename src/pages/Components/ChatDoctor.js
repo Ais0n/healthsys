@@ -144,6 +144,7 @@ class DoctorChatWidget extends React.Component {
             console.log("print evt");
             console.log(evt);
             console.log(evt.data);
+            this.setState({msg_lists_ : msg_lists_tmp});
         }
 
         this.ws.onclose = () => {
