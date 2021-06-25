@@ -24,7 +24,7 @@ function App() {
         <Route path="/loginsucceed" component={LoginSucceed}/>
         <Route path="/regsucceed" component={RegisterSucceed}/>
         <Route path="/user" component={User}/>
-        <Route path="/doctorinfo" component={KeshiInfo}/>
+        <Route path="/keshiinfo" component={KeshiInfo}/>
         <Route path="/doctorchat" component={DoctorChat}/>
         <Route path="/clientchat" component={ClientChat}/>
         <Route path="/chatroomloading" component={ChatRoomLoading}/>

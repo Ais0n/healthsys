@@ -80,42 +80,42 @@ class Mainpage extends React.Component {
                   <div className="sub-sub-title">选择您要就诊的科室</div>
                 </div>
                 <div className="department-table">
-                  <a href="/user">
+                  <a href="/keshiinfo">
                   <div className="department">
                       <img className="depart-pic" src={depart_pic_A} alt=""></img>
                       <div className="depart-text">精神卫生科</div>
                   </div>
                   </a>
 
-                  <a href="#">
+                  <a href="/keshiinfo">
                   <div className="department">
                       <img className="depart-pic" src={depart_pic_B} alt=""></img>
                       <div className="depart-text">内分泌科</div>
                   </div>
                   </a>
 
-                  <a href="#">
+                  <a href="/keshiinfo">
                   <div className="department">
                       <img className="depart-pic" src={depart_pic_C} alt=""></img>
                       <div className="depart-text">肾脏病科</div>
                   </div>
                   </a>
 
-                  <a href="#">
+                  <a href="/keshiinfo">
                   <div className="department">
                       <img className="depart-pic" src={depart_pic_D} alt=""></img>
                       <div className="depart-text">神经内科</div>
                   </div>
                   </a>
 
-                  <a href="#">
+                  <a href="/keshiinfo">
                   <div className="department">
                       <img className="depart-pic" src={depart_pic_E} alt=""></img>
                       <div className="depart-text">心血管内科</div>
                   </div>
                   </a>
 
-                  <a href="#">
+                  <a href="/keshiinfo">
                   <div className="department">
                       <img className="depart-pic" src={more} alt=""></img>
                       <div className="depart-text">更多</div>
