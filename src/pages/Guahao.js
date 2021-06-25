@@ -5,11 +5,12 @@ import './Guahao.css'
 import Myheader from './Components/Myheader'
 import Navbar from './Components/Navbar'
 import hosp from '../pic/zj1hosp.jpg'
+import hosp2 from '../pic/zj2hosp.jpg'
 import doc1 from '../pic/doc1.jpg'
 import {withRouter} from 'react-router-dom'
 
 import { Empty, Button, Input, Descriptions, Radio, Card, Steps, message, Divider, Space, List, Avatar, Image, Modal, Result, Alert } from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import { MessageOutlined, LikeOutlined, StarOutlined, UserOutlined } from '@ant-design/icons';
 import Myfooter from './Components/Myfooter';
 import { createRegistration, getServerUrl, queryDoctor } from '../utils/utils';
 
@@ -209,13 +210,13 @@ class Guahao extends React.Component{
                       width={120}
                       height={120}
                       alt="logo"
-                      src={hosp}
+                      src={item.hospitalName == "浙二医院" ? hosp2 : hosp}
                     />
                   }
                 >
                   
                   <List.Item.Meta
-                        avatar={<Avatar size={100} src={`${getServerUrl()}/images/${item.avatar}`}/>}
+                        avatar={<Avatar size={100} src={`${getServerUrl()}/images/${item.avatar}`} icon={<UserOutlined/>}/>}
                         title={item.name}
                         description={`${item.age}岁 | ${item.hospitalName} | ${item.keshi} | 从医${item.workYears}年`}
                     />

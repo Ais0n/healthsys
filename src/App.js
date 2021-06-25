@@ -11,6 +11,7 @@ import ErrorPage from './pages/ErrorPage'
 import DoctorChat from './pages/Components/ChatDoctor'
 import ClientChat from './pages/Components/ChatClient'
 import ChatRoomLoading from './pages/Components/Loading'
+import KeshiInfo from './pages/KeshiInfo';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/loginsucceed" component={LoginSucceed}/>
         <Route path="/regsucceed" component={RegisterSucceed}/>
         <Route path="/user" component={User}/>
+        <Route path="/doctorinfo" component={KeshiInfo}/>
         <Route path="/doctorchat" component={DoctorChat}/>
         <Route path="/clientchat" component={ClientChat}/>
         <Route path="/chatroomloading" component={ChatRoomLoading}/>
