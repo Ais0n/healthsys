@@ -10,6 +10,7 @@ import ws from "ws"
 import localStorage from "localStorage"
 import { getHistoryInfo, getPatientInfo, getPatientInfoTmp } from '../../utils/utils'
 import { withRouter } from 'react-router-dom';
+import patient_avatar from '../../pic/I_am_patient.png'
 
 
 const size = {
@@ -54,6 +55,18 @@ class DoctorChatWidget extends React.Component {
         //console.log(this.props.msg_lists_);
         //console.log(this.state.msg_lists_);
         //console.log(this.state.current_user_list_);
+    }
+
+    onChangeChatTgt = (e) => {
+        let user_list_tmp = this.state.user_list_;
+        for (let i = 0; i < user_list_tmp.length; ++i){
+            if (user_list_tmp[i] == e){
+                user_list_tmp[i].unread = 0;
+            }
+        } 
+        this.setState({ nowChatTgt: e,
+                        user_list_: user_list_tmp
+                    });
     }
 
     onPatientNext = () => {
@@ -429,7 +442,8 @@ class DoctorChatView extends React.Component {
             for (let i = 0; i < patientInfo.data.userInfo.length; ++i) {
                 console.log(patientInfo);
                 user_list_tmp.push({
-                    avator: "http://localhost:8000/images/" + patientInfo.data.userInfo.avator,
+                    //avator: "http://localhost:8000/images/" + patientInfo.data.userInfo.avator,
+                    avatar: patient_avatar,
                     alt: '用户',
                     id: patientInfo.data.userInfo[i]['userId'],
                     title: patientInfo.data.userInfo[i]['userName'],
@@ -445,6 +459,7 @@ class DoctorChatView extends React.Component {
             if (user_list_tmp.length != 0) {
                 current_user_list_tmp.push(user_list_tmp[0]);
                 chat_target = user_list_tmp[0];
+                global_user_list_ = []
                 global_user_list_.push(chat_target);
             }
             console.log(current_user_list_tmp);
