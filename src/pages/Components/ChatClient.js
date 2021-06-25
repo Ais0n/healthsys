@@ -10,6 +10,7 @@ import ws from "ws"
 import localStorage from "localStorage"
 import { getHistoryInfo, getDoctorInfo } from '../../utils/utils'
 import { withRouter } from 'react-router-dom';
+import doctor_avatar from '../../pic/I_am_doctor.png'
 
 
 const size = {
@@ -25,9 +26,13 @@ class ClientChatWidget extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: this.props.user,
+            user: null,
             user_list_: this.props.user_list_,
             msg_lists_: this.props.msg_lists_,
+            current_user_list_: [],
+            current_msg_lists_: {},
+            current_doctors: [],
+            current_msgs: {},
             sendMsg: "",
             window_size: {
                 width: 700,
@@ -72,16 +77,56 @@ class ClientChatWidget extends React.Component {
                 console.log(msg.message);
             }
             else{
-                (msg_lists_tmp[this.state.user.id] || (msg_lists_tmp[this.state.user.id] = [])).push({
+                let current_doctors_tmp = this.state.current_user_list_;
+                let current_doctor = null;
+                let doctors = this.state.user_list_;
+                let current_msgs_tmp = this.state.current_msg_lists_;
+                let msgs = this.state.msg_lists_;
+
+                for (let i = 0; i < doctors.length; ++i) {
+                    console.log("doctor.id" + doctors[i].id);
+                    console.log("msg.from" + msg.from);
+                    if (doctors[i].id == msg.from ) {
+                        let is_in_list = false;
+                        for (let j=0; j < current_doctors_tmp.length; ++j){
+                            if (doctors[i] == current_doctors_tmp[j]){
+                                is_in_list = true;
+                                break;
+                            }
+                        }
+                        if (is_in_list){
+                            current_doctor = doctors[i];
+                        }
+                        else{
+                            current_doctors_tmp.push(doctors[i]);
+                            current_msgs_tmp[doctors[i].id] = msgs[doctors[i].id];
+                            current_doctor = doctors[i];
+                        }
+                    }
+                }
+                console.log("current_doctor" + current_doctor);
+                (msg_lists_tmp[current_doctor.id] || (msg_lists_tmp[current_doctor.id] = [])).push({
                     position: 'left',
                     type: 'text',
                     text: msg.message,
                     date: new Date()
                 });
+                console.log(doctors);
+                console.log(msgs);
+                console.log('current_doctors');
+                console.log(current_doctors_tmp);
+                console.log(current_msgs_tmp);
+                this.setState({
+                    current_doctors: current_doctors_tmp,
+                    current_msgs: current_msgs_tmp,
+                    user: current_doctors_tmp[0],
+                })
             }
+            
             console.log("print evt");
             console.log(evt);
             console.log(evt.data);
+            
         }
 
         this.ws.onclose = () => {
@@ -93,7 +138,7 @@ class ClientChatWidget extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        this.setState({ user: nextProps.user });
+        //this.setState({ user: nextProps.user });
     }
 
     componentWillUnmount() {
@@ -147,15 +192,40 @@ class ClientChatWidget extends React.Component {
         }
     }
 
+    onChangeChatTgt = (e) => {
+        let user_list_tmp = this.state.user_list_;
+        for (let i = 0; i < user_list_tmp.length; ++i) {
+            if (user_list_tmp[i] == e) {
+                user_list_tmp[i].unread = 0;
+            }
+        }
+        this.setState({
+            nowChatTgt: e,
+            user_list_: user_list_tmp
+        });
+    }
+    
     componentDidUpdate(prevProps, prevState, snapshot) {
         this.messagesEnd.scrollTop = this.messagesEnd.scrollHeight;
     }
 
     render() {
         console.log('render2')
-        console.log(this.state.user.id);
+        //console.log(this.state.user.id);
         console.log(this.state.msg_lists_);
+        console.log(this.state.user);
         return (
+        <div>
+            <Row align='middle' justify='center'>
+            <Col style={{
+                width: this.state.window_size.width * 0.2 - 2,
+                height: 600,
+                display: 'inline-block',
+                borderRight: "2px solid #C4C4FF",
+                overflow: "auto"
+            }}>
+                <ChatList className='chat-list' onClick={e => this.onChangeChatTgt(e)} dataSource={this.state.current_doctors} />
+            </Col>
             <Col style={{
                 width: this.state.window_size.width * 0.5,
                 height: 600,
@@ -186,10 +256,15 @@ class ClientChatWidget extends React.Component {
                             this.messagesEnd = el;
                         }}
                     >
+                        {this.state.current_doctors.length == 0 ?
+                        <div>
+                            暂无消息
+                        </div>
+                        :
                         <MessageList
                             className='message-list'
-                            dataSource={this.state.msg_lists_[this.state.user.id]}
-                        />
+                            dataSource={this.state.current_msgs[this.state.user.id]}
+                        />}
                     </div>
                 </Row>
                 <Row>
@@ -238,6 +313,29 @@ class ClientChatWidget extends React.Component {
                     </Col>
                 </Row>
             </Col>
+
+            <Col style={{
+                width: this.state.window_size.width * 0.2 - 2,
+                height: 600,
+                display: 'inline-block',
+                borderLeft: "2px solid #C4C4FF",
+                overflow: "auto",
+                textAlign: "center",
+                verticalAlign: "middle",
+                backgroundColor: "\t#F9F9FF"
+            }}>
+                <h1 style={{ textAlign: 'center' }}>医生信息</h1>
+                <ul align="left">
+                    <li>{this.state.user == null ? "姓名: 暂无信息" : "姓名: " + this.state.user.title}</li>
+                    <li>{this.state.user == null ? "所属医院: 暂无信息" : "所属医院: " + this.state.user.info.hospitalName}</li>
+                    <li>{this.state.user == null ? "科室: 暂无信息" : "科室:" + this.state.user.info.keshi}</li>
+                    <li>{this.state.user == null ? "工作经验: 暂无信息" : "工作经验: " + this.state.user.info.workYears + " 年"}</li>
+                    <li>{this.state.user == null ? "性别: 暂无信息" : this.state.user.info.xingbie == 1 ? "性别: 男" : "性别: 女"}</li>
+                    <li>{this.state.user == null ? "职称: 暂无信息" : "职称: " + this.state.user.info.zhicheng}</li>
+                </ul>
+            </Col>
+            </Row>
+        </div>
         );
     }
 }
@@ -270,7 +368,7 @@ class ClientChatView extends React.Component {
             let msg_lists_tmp = {}
             for (let i = 0; i < doctorInfo.data.doctorInfo.length; ++i) {
                 user_list_tmp.push({
-                    avator: '../../../public/I_am_doctor.png',
+                    avatar: doctor_avatar,
                     alt: '医生',
                     id: doctorInfo.data.doctorInfo[i]['userId'],
                     title: doctorInfo.data.doctorInfo[i]['userName'],
@@ -379,34 +477,12 @@ class ClientChatView extends React.Component {
     render() {
         return (
             <div>
-                <Row align='middle' justify='center'>
-                    <Col style={{width: this.state.window_size.width * 0.2 - 2,
-                                height: 600,
-                                display: 'inline-block',
-                                borderRight: "2px solid #C4C4FF",
-                                overflow: "auto"}}>
-                        <ChatList className='chat-list' onClick={e => this.onChangeChatTgt(e)} dataSource={this.state.user_list_} />
-                    </Col>
-                    {this.state.user_list_.length == 0 ? <div>没有已经启动的问诊</div> : <ClientChatWidget user={this.state.nowChatTgt} user_list_={this.state.user_list_} msg_lists_={this.state.msg_lists_}/>}
-                    <Col style={{width: this.state.window_size.width * 0.2 - 2,
-                                height: 600,
-                                display: 'inline-block',
-                                borderLeft: "2px solid #C4C4FF",
-                                overflow: "auto",
-                                textAlign: "center",
-                                verticalAlign: "middle",
-                                backgroundColor: "\t#F9F9FF"}}>
-                        <h1 style={{ textAlign: 'center' }}>医生信息</h1>
-                        <ul align="left">
-                            <li>{this.state.nowChatTgt == null ? "姓名: 暂无信息" : "姓名: " + this.state.nowChatTgt.title}</li>
-                            <li>{this.state.nowChatTgt == null ? "所属医院: 暂无信息" : "所属医院: " + this.state.nowChatTgt.info.hospitalName}</li>
-                            <li>{this.state.nowChatTgt == null ? "科室: 暂无信息" : "科室:" + this.state.nowChatTgt.info.keshi}</li>
-                            <li>{this.state.nowChatTgt == null ? "工作经验: 暂无信息" : "工作经验: " + this.state.nowChatTgt.info.workYears + " 年"}</li>
-                            <li>{this.state.nowChatTgt == null ? "性别: 暂无信息" : this.state.nowChatTgt.info.xingbie == 1 ? "性别: 男" : "性别: 女"}</li>
-                            <li>{this.state.nowChatTgt == null ? "职称: 暂无信息" : "职称: " + this.state.nowChatTgt.info.zhicheng}</li>
-                        </ul>
-                    </Col>
-                </Row>
+                {this.state.user_list_.length == 0 ? 
+                <div>
+                没有已经启动的问诊
+                </div>: 
+                <ClientChatWidget user={this.state.nowChatTgt} user_list_={this.state.user_list_} msg_lists_={this.state.msg_lists_}/>
+                }
             </div>
         );
     }
