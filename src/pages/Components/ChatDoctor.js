@@ -132,11 +132,12 @@ class DoctorChatWidget extends React.Component {
         
         this.ws.onmessage = evt => {
             let msg = JSON.parse(evt.data);
+            let current_user = this.state.user;
             if (msg.to == msg.from){
                 console.log(msg.message);
             }
             else{
-                (msg_lists_tmp[this.state.user.id] || (msg_lists_tmp[this.state.user.id] = [])).push({
+                (msg_lists_tmp[current_user.id] || (msg_lists_tmp[current_user.id] = [])).push({
                     position: 'left',
                     type: 'text',
                     text: msg.message,
@@ -146,6 +147,7 @@ class DoctorChatWidget extends React.Component {
             console.log("print evt");
             console.log(evt);
             console.log(evt.data);
+
 
         }
 
