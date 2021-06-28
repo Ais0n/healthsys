@@ -47,13 +47,6 @@ class DoctorChatWidget extends React.Component {
         this.messagesEnd = createRef();
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.ws = new WebSocket('ws://localhost:8000/message');
-        //console.log('clientchatwidget constructor');
-        //console.log(this.state.user);
-        //console.log(this.state.user_list_);
-        //console.log('compare');
-        //console.log(this.props.msg_lists_);
-        //console.log(this.state.msg_lists_);
-        //console.log(this.state.current_user_list_);
     }
 
     onChangeChatTgt = (e) => {
@@ -200,6 +193,19 @@ class DoctorChatWidget extends React.Component {
         this.setState({ sendMsg: "" , msg_lists_ : msg_lists_tmp});
     }
 
+    onChangeChatTgt = (e) => {
+        let user_list_tmp = this.state.user_list_;
+        for (let i = 0; i < user_list_tmp.length; ++i){
+            if (user_list_tmp[i] == e){
+                user_list_tmp[i].unread = 0;
+            }
+        } 
+        this.setState({ nowChatTgt: e,
+                        user: e,
+                        user_list_: user_list_tmp
+                    });
+    }
+
     onPicSend = (info) => {
         if (info.file.status !== 'uploading') {
             console.log(info.file, info.fileList);
@@ -329,7 +335,6 @@ class DoctorChatWidget extends React.Component {
     }
 }
 
-
 class DoctorChatView extends React.Component {
     constructor(props) {
         super(props);
@@ -381,47 +386,6 @@ class DoctorChatView extends React.Component {
                 message.error(historyInfo.data.message);
             }
         })
-/*
-        getPatientInfo().then(
-        (patientInfo)=>{
-            message.success(patientInfo.data.message);
-
-            console.log("patientInfo");
-            console.log(patientInfo);
-
-            let user_list_tmp = []
-            for (let i = 0; i < patientInfo.data.registrationInfo.length; ++i){
-                user_list_tmp.push({
-                    avator: '../../../public/I_am_doctor.png',
-                    alt: '用户',
-                    id: patientInfo.data.registrationInfo[i]['userId'],
-                    title: patientInfo.data.registrationInfo[i]['userName'],
-                    subtite: 'What are you doing?',
-                    date: new Date(),
-                    info: patientInfo.data.registrationInfo[i]['userInfo'],
-                    unread: 1,
-                });
-            }
-
-            let current_user_list_tmp = [];
-            if (user_list_tmp.length != 0){
-                current_user_list_tmp.push(user_list_tmp[0]);
-            }
-
-            this.setState({ current_user_list_ : current_user_list_tmp, 
-                            patientInfoData: patientInfo.data.registrationInfo,
-                            nowChatTgt: user_list_tmp[0],
-                            user_list_: user_list_tmp,
-                        });
-            
-        }, (patientInfo) => {
-            if (patientInfo.isAxiiosError){
-                message.error("网络异常");
-            } else {
-                message.error(patientInfo.data.message);
-            }
-        })
-*/
 
     getPatientInfoTmp().then(
         (patientInfo) => {
@@ -472,17 +436,7 @@ class DoctorChatView extends React.Component {
 
     }
 
-    onChangeChatTgt = (e) => {
-        let user_list_tmp = this.state.user_list_;
-        for (let i = 0; i < user_list_tmp.length; ++i){
-            if (user_list_tmp[i] == e){
-                user_list_tmp[i].unread = 0;
-            }
-        } 
-        this.setState({ nowChatTgt: e,
-                        user_list_: user_list_tmp
-                    });
-    }
+
 
     updateWindowDimensions() {
         this.setState({ window_size: { width: window.innerWidth, height: window.innerHeight } });
