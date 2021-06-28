@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Card, Button, Avatar, List, Form, Input, Radio, Checkbox, Select, message, Skeleton, Empty } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, LockOutlined, CheckOutlined } from '@ant-design/icons';
 import './ChangePassword.css'
-import { approveNewDoctor, queryNewDoctor } from '../../utils/utils';
+import { approveNewDoctor, getServerUrl, queryNewDoctor } from '../../utils/utils';
 import CompButton from '../Components/CompButton';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -97,7 +97,7 @@ export default class ApproveDoctor extends React.Component {
                             >
 
                                 <List.Item.Meta
-                                    avatar={<Avatar size={100} src={`http://localhost:8000/images/${item.userInfo.avatar}`} />}
+                                    avatar={<Avatar size={100} src={`${getServerUrl()}/images/${item.userInfo.avatar}`} />}
                                     title={item.userName}
                                     description={this.genDescription(item)}
                                 />

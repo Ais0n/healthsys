@@ -335,6 +335,7 @@ class DoctorChatWidget extends React.Component {
     }
 }
 
+
 class DoctorChatView extends React.Component {
     constructor(props) {
         super(props);
@@ -351,7 +352,6 @@ class DoctorChatView extends React.Component {
         }
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
-
     loadHistoryAndPatientInfo = async () => {
         getHistoryInfo().then(
         (historyInfo)=>{
@@ -454,6 +454,10 @@ class DoctorChatView extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    updateWindowDimensions() {
+        this.setState({ window_size: { width: window.innerWidth, height: window.innerHeight } });
     }
 
     render() {

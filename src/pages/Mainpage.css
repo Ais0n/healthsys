@@ -132,7 +132,7 @@ a:hover {
 }
 
 .department-table {
-  margin-top: 10%;
+  margin-top: 30px;
   margin-left: 5%;
   margin-right: 0%;
   display: block;
@@ -166,7 +166,6 @@ a:hover {
 }
 
 .depart-text {
-  margin-top: 15px;
   text-align: center;
   font-size: calc(1px + 2vmin);
   color: grey;
@@ -208,10 +207,14 @@ a:hover {
 }
 
 .doctor-profile {
-  height: 70%;
-  width: 70%;
+  height: 200px;
+  width: 160px;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.bookButton {
+  margin-left: 44%;
 }
