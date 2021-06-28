@@ -85,8 +85,7 @@ class DoctorChatWidget extends React.Component {
         this.setState({user : this.props.user_list_[current_user_num_]});
 
         let fromClientId = this.getFromClientId();
-        let toClientId = this.getToClientId();
-        
+        let toClientId = this.props.user_list_[current_user_num_].id;
         (msg_lists_tmp[this.props.user_list_[current_user_num_].id] || (msg_lists_tmp[this.props.user_list_[current_user_num_].id] = [])).push({
             position: 'right',
             type: 'text',
@@ -225,6 +224,13 @@ class DoctorChatWidget extends React.Component {
         console.log(this.state.current_user_list_);
         return (
         <div>
+            <Col style={{width: this.state.window_size.width * 0.2 - 2,
+                        height: 600,
+                        display: 'inline-block',
+                        borderRight: "2px solid #C4C4FF",
+                        overflow: "auto"}}>
+                <ChatList className='chat-list' onClick={e => this.onChangeChatTgt(e)} dataSource={global_user_list_} />
+            </Col>
             <Col style={{
                 width: this.state.window_size.width * 0.5,
                 height: 600,
@@ -504,13 +510,6 @@ class DoctorChatView extends React.Component {
         return (
             <div>
                 <Row align='middle' justify='center'>
-                    <Col style={{width: this.state.window_size.width * 0.2 - 2,
-                                height: 600,
-                                display: 'inline-block',
-                                borderRight: "2px solid #C4C4FF",
-                                overflow: "auto"}}>
-                        <ChatList className='chat-list' onClick={e => this.onChangeChatTgt(e)} dataSource={global_user_list_} />
-                    </Col>
                     {this.state.user_list_.length == 0 ? 
                         <div>没有已经启动的问诊</div> : 
                         <DoctorChatWidget 
@@ -539,8 +538,6 @@ class DoctorChatView extends React.Component {
         );
     }
 }
-
-
 
 
 class Chatter extends React.Component {
