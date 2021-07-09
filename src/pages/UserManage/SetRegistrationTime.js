@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Card, Button, Form, Input, Row, Col, Radio, Checkbox, Space, Select, Skeleton, Table, Empty, message, InputNumber, DatePicker} from 'antd';
+import { Layout, Menu, Breadcrumb, Card, Button, Form, Input, Row, Col, Radio, Alert, Checkbox, Space, Select, Skeleton, Table, Empty, message, InputNumber, DatePicker} from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, LockOutlined } from '@ant-design/icons';
 import './ChangePassword.css'
 import { addTime, queryTime } from '../../utils/utils';
@@ -76,6 +76,8 @@ export default class SetRegistrationTime extends React.Component {
         })
     }
 
+    status = this.props.userInfo.userData.userStatus;
+
     renderTable = () => {
         if(this.state.status) {
             if(this.state.data.length>0) {
@@ -114,10 +116,20 @@ export default class SetRegistrationTime extends React.Component {
 
     renderForm = () => {
         return(
+        !this.status ? 
+            <Alert
+            message="提示"
+            description="您的信息审核尚未通过，部分功能已被禁用，请尽快完善个人信息并联系管理员审核"
+            type="info"
+            showIcon
+            style={{marginBottom: "50px"}}
+            /> 
+            : 
             <Form
-                name="additem"
-                initialValues={{}}
-                onFinish={this.onFinish}
+            name="additem"
+            initialValues={{}}
+            onFinish={this.onFinish}
+            style={{marginBottom: "50px"}}
             >
                 <Row>
                     <Col span={8}>

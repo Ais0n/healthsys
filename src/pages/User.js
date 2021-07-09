@@ -74,7 +74,7 @@ class User extends React.Component {
                 case '31':
                     return (
                         <Card title="设置就诊时间" bordered={true} className="card">
-                        <SetRegistrationTime/>
+                        <SetRegistrationTime userInfo={userInfo}/>
                         </Card>
                     )
                 case '41':
